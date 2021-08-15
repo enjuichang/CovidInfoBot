@@ -52,4 +52,27 @@ def get2021kmtdata(url):
     #     json.dump(kmt_full_text, f)
     
     return print(kmt_full_text)
-get2021kmtdata(url)
+
+url = "https://www.ftvnews.com.tw/news/detail/2021510P12M1"
+def getftvdata(url):
+    request = req.Request(url, headers={
+        "user-agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+    })
+    with req.urlopen(request) as response:
+        data = response.read().decode("utf-8")
+    # print(data)
+    root = bs4.BeautifulSoup(data, "html.parser")
+    contents = root.find_all("div", id="newscontent")
+    contents1 = root.find_all("div", id="preface")
+    for content1 in contents1:
+        ftv_full_text1 = content1.getText()
+    # print(ftv_full_text1)
+    for content in contents:
+        ftv_full_text = content.getText()
+    # print(ftv_full_text)
+    total_full_text = ftv_full_text1 + ftv_full_text
+    with open("ftv2021fed.txt", mode="w", encoding="utf-8") as f:
+        f.write(total_full_text)
+    return print(total_full_text)
+
+getftvdata(url)
