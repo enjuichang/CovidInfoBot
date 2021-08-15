@@ -80,25 +80,26 @@ def get2021ftvdata(url): #更改url即可得到民視新聞稿
 # get2021ftvdata(url)
 
 url = "https://www.chinatimes.com/newspapers/20210225000490-260110?chdtv"
-request = req.Request(url, headers={
-    "user-agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
-})
+def get2021chtimedata(url): #中國時報尚未完成
+    request = req.Request(url, headers={
+        "user-agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+    })
 
-with req.urlopen(request) as response:
-    data = response.read().decode("utf-8")
-# print(data)
-root = bs4.BeautifulSoup(data, "html.parser")
-contents = root.find_all("div", class_="article-body")
-for content in contents:
-    # chtime_full_text = content.getText()
-    if content.p !=None:
-        chtime_full_text=content.p.string
-print(chtime_full_text)
-notcontents = root.find_all("div", class_="promote-word")
-for notcontent in notcontents:
-    # not_full_text = notcontent.getText()
-    if notcontent.a !=None:
-        not_full_text = notcontent.a.string
-# print(not_full_text)
-# chtime_full_text = chtime_full_text.replace(not_full_text, "")
-# print(chtime_full_text)
+    with req.urlopen(request) as response:
+        data = response.read().decode("utf-8")
+    # print(data)
+    root = bs4.BeautifulSoup(data, "html.parser")
+    contents = root.find_all("div", class_="article-body")
+    for content in contents:
+        # chtime_full_text = content.getText()
+        if content.p !=None:
+            chtime_full_text=content.p.string
+    print(chtime_full_text)
+    notcontents = root.find_all("div", class_="promote-word")
+    for notcontent in notcontents:
+        # not_full_text = notcontent.getText()
+        if notcontent.a !=None:
+            not_full_text = notcontent.a.string
+    # print(not_full_text)
+    # chtime_full_text = chtime_full_text.replace(not_full_text, "")
+    # print(chtime_full_text)
