@@ -4,10 +4,9 @@ import json
 from pprint import pprint
 import bs4
 
-url= "https://www.dpp.org.tw/media/contents/9178" #這邊需要再改(希望可以把url裝在list中，然後就可以一一讀取網頁資訊)
+url= "https://www.dpp.org.tw/media/contents/9188"#"https://www.dpp.org.tw/media/contents/9178" #這邊需要再改(希望可以把url裝在list中，然後就可以一一讀取網頁資訊)
 
-def get2021dppdata(url):
-    #print(url)
+def get2021dppdata(url): #民進黨的部分尚未能更改url即可得到新聞稿
     request = req.Request(url, headers={
         "user-agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
     })
@@ -21,14 +20,15 @@ def get2021dppdata(url):
         full_text = content.getText()
         
     full_text = full_text.replace("\n","").replace("\r\n","").replace("\t","").replace("\t\xa0\n","")
-    with open("dpp2021fed.txt", mode="w", encoding="utf-8") as f:
-        f.write(full_text)
+    # with open("dpp2021fed.txt", mode="w", encoding="utf-8") as f:
+    #     f.write(full_text)
+    return full_text
 
 # get2021dppdata(url)
 
-url = "http://www.kmt.org.tw/2020/08/blog-post_18.html"
+# url = "http://www.kmt.org.tw/2020/08/blog-post_81.html"# "http://www.kmt.org.tw/2020/08/blog-post_18.html"
 
-def get2021kmtdata(url):
+def get2021kmtdata(url): #更改url即可得到國民黨新聞稿
     request = req.Request(url, headers={
         "user-agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
     })
@@ -53,8 +53,8 @@ def get2021kmtdata(url):
     
     return print(kmt_full_text)
 
-url = "https://www.ftvnews.com.tw/news/detail/2021510P12M1"
-def getftvdata(url):
+# url = "https://www.ftvnews.com.tw/news/detail/2021815P03M1"
+def get2021ftvdata(url): #更改url即可得到民視新聞稿
     request = req.Request(url, headers={
         "user-agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
     })
@@ -75,4 +75,6 @@ def getftvdata(url):
         f.write(total_full_text)
     return print(total_full_text)
 
-getftvdata(url)
+# get2021kmtdata(url)
+get2021dppdata(url)
+# get2021ftvdata(url)
