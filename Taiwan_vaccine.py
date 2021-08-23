@@ -45,6 +45,7 @@
 from requests import post
 from requests import codes
 import math
+import json
 try:
     from intent import Loki_side_effect
 except:
@@ -52,8 +53,10 @@ except:
 
 
 LOKI_URL = "https://api.droidtown.co/Loki/BulkAPI/"
-USERNAME = ""
-LOKI_KEY = ""
+with open("account.json", mode="r", encoding="utf-8") as file:
+    useraccount = json.loads(file.read())
+USERNAME = useraccount["username"]
+LOKI_KEY = useraccount["loki_project_key"]
 # 意圖過濾器說明
 # INTENT_FILTER = []        => 比對全部的意圖 (預設)
 # INTENT_FILTER = [intentN] => 僅比對 INTENT_FILTER 內的意圖
@@ -190,7 +193,9 @@ if __name__ == "__main__":
     print("")
 
     # 輸入其它句子試看看
-    #inputLIST = ["輸入你的內容1", "輸入你的內容2"]
-    #filterLIST = []
-    #resultDICT = runLoki(inputLIST, filterLIST)
-    #print("Result => {}".format(resultDICT))
+    inputLIST = ["牛津副作用為何"]
+    filterLIST = []
+    resultDICT = runLoki(inputLIST, filterLIST)
+    # print("Result => {}".format(resultDICT))
+    print("您所查詢的疫苗為: {}".format(resultDICT["疫苗"]))
+    print("{0}的常見副作用為{1}".format(resultDICT["疫苗"], resultDICT["副作用"]))
