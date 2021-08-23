@@ -193,7 +193,7 @@ if __name__ == "__main__":
     print("")
 
     # 輸入其它句子試看看
-    inputLIST = ["牛津副作用為何"]
+    inputLIST = ["Moderna副作用為何"]
     filterLIST = []
     resultDICT = runLoki(inputLIST, filterLIST)
     # print("Result => {}".format(resultDICT))
