@@ -193,8 +193,9 @@ if __name__ == "__main__":
     print("")
 
     # 輸入其它句子試看看
-    inputLIST = ["az疫苗副作用"]
+    inputLIST = ["打完az後，出現哪些嚴重副作用需要送醫"]
     filterLIST = []
     resultDICT = runLoki(inputLIST, filterLIST)
     print("您所查詢的疫苗為: {}".format(resultDICT["疫苗"]))
     print("{0}的常見副作用為{1}".format(resultDICT["疫苗"], resultDICT["副作用"]))
+    print("接種完{0}疫苗後，若有以下症狀請盡速就醫: {1}".format(resultDICT["疫苗"], resultDICT["嚴重副作用"]))
