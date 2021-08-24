@@ -54,9 +54,9 @@ except:
 
 LOKI_URL = "https://api.droidtown.co/Loki/BulkAPI/"
 with open("account.json", mode="r", encoding="utf-8") as file:
-    useraccount = json.loads(file.read())
-USERNAME = useraccount["username"]
-LOKI_KEY = useraccount["loki_project_key"]
+    useraccountdict = json.loads(file.read)
+USERNAME = useraccountdict["username"]
+LOKI_KEY = useraccountdict["loki_project_key"]
 # 意圖過濾器說明
 # INTENT_FILTER = []        => 比對全部的意圖 (預設)
 # INTENT_FILTER = [intentN] => 僅比對 INTENT_FILTER 內的意圖
@@ -188,14 +188,13 @@ def testLoki(inputLIST, filterLIST):
 if __name__ == "__main__":
     # side_effect
     print("[TEST] side_effect")
-    inputLIST = ['az副作用','az疫苗副作用為何','第一劑az疫苗副作用','az疫苗會有哪些副作用','請問az疫苗副作用為何','第一劑az疫苗會有哪些副作用']
+    inputLIST = ['az副作用','第一劑az副作用','az疫苗副作用為何','第一劑az疫苗副作用','az疫苗會有哪些副作用','請問az疫苗副作用為何','第一劑az會有哪些副作用','第一劑az疫苗會有哪些副作用','打完莫德納後，出現哪些嚴重副作用需要送醫','打完莫德納疫苗後，出現哪些嚴重副作用需要送醫']
     testLoki(inputLIST, ['side_effect'])
     print("")
 
     # 輸入其它句子試看看
-    inputLIST = ["Moderna副作用為何"]
+    inputLIST = ["az疫苗副作用"]
     filterLIST = []
     resultDICT = runLoki(inputLIST, filterLIST)
-    # print("Result => {}".format(resultDICT))
     print("您所查詢的疫苗為: {}".format(resultDICT["疫苗"]))
     print("{0}的常見副作用為{1}".format(resultDICT["疫苗"], resultDICT["副作用"]))

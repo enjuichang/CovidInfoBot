@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
-import json
-from pprint import pprint
+
 """
     Loki module for side_effect
 
@@ -14,15 +13,14 @@ from pprint import pprint
     Output:
         resultDICT    dict
 """
-
+import json
 DEBUG_side_effect = True
-userDefinedDICT = {"AZ": ["AstraZeneca", "az", "AZ", "牛津/阿斯利康", "牛津", "阿斯利康", "阿斯特捷利康"], "doze": ["第一劑", "第二劑", "第三劑"], "Moderna": ["Moderna", "莫德納", "莫德納疫苗"], "side_effect": ["副作用"], "Pfizer-BioNTech": ["Pfizer-BioNTech", "輝瑞", "輝瑞疫苗", "BNT", "Biotech", "BioTech", "biotech", "BIOTECH"]}
+userDefinedDICT = {"AZ": ["AstraZeneca", "az", "AZ", "牛津/阿斯利康", "牛津", "阿斯利康", "阿斯特捷利康"], "doze": ["第一劑", "第二劑", "第三劑"], "Moderna": ["Moderna", "莫德納"], "syn_verb": ["有", "出現"], "side_effect": ["副作用", "嚴重副作用"], "vaccine_verb": ["注射", "接種", "打完", "打過"], "Pfizer-BioNTech": ["Pfizer-BioNTech", "輝瑞", "BNT", "Biotech", "BioTech", "biotech", "BIOTECH"]}
 vaccinedict = userDefinedDICT["AZ"] + userDefinedDICT["Moderna"] + userDefinedDICT["Pfizer-BioNTech"]
 vaccinedict = vaccinedict + ["AstraZeneca", "Moderna", "Pfizer-BioNTech"]
 # 將符合句型的參數列表印出。這是 debug 或是開發用的。
 with open("side_effect.json", mode="r", encoding="utf-8") as file:
-    sideeffectDict = json.load(file)
-# pprint(sideeffectDict)
+    sideeffectDict = json.load(file.read())
 
 def debugInfo(inputSTR, utterance):
     if DEBUG_side_effect:
@@ -53,15 +51,42 @@ def getResult(inputSTR, utterance, args, resultDICT):
                     resultDICT["疫苗"].append(k)
                     resultDICT["副作用"].append(sideeffectDict[k])
 
-    if utterance == "[第一劑][az][疫苗][會]有哪些副作用":
+    if utterance == "[打完][莫德納][後]，[出現]哪些嚴重副作用需要送醫":
         if args[1] in vaccinedict:
             for k in userDefinedDICT.keys():
                 if args[1] in userDefinedDICT[k]:
                     resultDICT["疫苗"].append(k)
                     resultDICT["副作用"].append(sideeffectDict[k])
-        pass
 
-    if utterance == "[第一劑][az][疫苗]副作用":
+    if utterance == "[打完][莫德納]疫苗[後]，[出現]哪些嚴重副作用需要送醫":
+        if args[1] in vaccinedict:
+            for k in userDefinedDICT.keys():
+                if args[1] in userDefinedDICT[k]:
+                    resultDICT["疫苗"].append(k)
+                    resultDICT["副作用"].append(sideeffectDict[k])
+
+    if utterance == "[第一劑][az][會]有哪些副作用":
+        if args[1] in vaccinedict:
+            for k in userDefinedDICT.keys():
+                if args[1] in userDefinedDICT[k]:
+                    resultDICT["疫苗"].append(k)
+                    resultDICT["副作用"].append(sideeffectDict[k])
+
+    if utterance == "[第一劑][az]副作用":
+        if args[1] in vaccinedict:
+            for k in userDefinedDICT.keys():
+                if args[1] in userDefinedDICT[k]:
+                    resultDICT["疫苗"].append(k)
+                    resultDICT["副作用"].append(sideeffectDict[k])
+
+    if utterance == "[第一劑][az]疫苗[會]有哪些副作用":
+        if args[1] in vaccinedict:
+            for k in userDefinedDICT.keys():
+                if args[1] in userDefinedDICT[k]:
+                    resultDICT["疫苗"].append(k)
+                    resultDICT["副作用"].append(sideeffectDict[k])
+
+    if utterance == "[第一劑][az]疫苗副作用":
         if args[1] in vaccinedict:
             for k in userDefinedDICT.keys():
                 if args[1] in userDefinedDICT[k]:
