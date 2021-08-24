@@ -19,6 +19,7 @@ userDefinedDICT = {"AZ": ["AstraZeneca", "az", "AZ", "牛津/阿斯利康", "牛
 vaccinedict = userDefinedDICT["AZ"] + userDefinedDICT["Moderna"] + userDefinedDICT["Pfizer-BioNTech"]
 vaccinedict = vaccinedict + ["AstraZeneca", "Moderna", "Pfizer-BioNTech"]
 # 將符合句型的參數列表印出。這是 debug 或是開發用的。
+
 with open("side_effect.json", mode="r", encoding="utf-8") as file:
     sideeffectDict = json.load(file.read())
 
