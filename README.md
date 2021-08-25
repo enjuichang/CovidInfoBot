@@ -1,1 +1,1 @@
-# MediaSimilarity
+# CovidInfoBot
