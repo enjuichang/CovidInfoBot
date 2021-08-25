@@ -51,7 +51,7 @@ try:
 except:
     from .intent import Loki_vaccine_stock
 
-with open("account.json", mode="r", encoding="utf-8") as file:
+with open("account.info", mode="r", encoding="utf-8") as file:
     useraccountdict = json.loads(file.read)
 
 LOKI_URL = "https://api.droidtown.co/Loki/BulkAPI/"
