@@ -15,7 +15,7 @@
 """
 
 DEBUG_vaccine_stock = True
-userDefinedDICT = {"AZ": ["AZ", "AstraZeneca", "az", "牛津", "牛津/阿斯利康", "阿斯利康", "阿斯特捷利康"], "dose": ["第一劑", "第二劑", "第三劑"], "Taiwan": ["台灣", "臺灣", "本島", "本國", "全台", "全台灣", "全臺灣", "全島", "全臺", "全臺各地", "全國"], "Medigen": ["高端", "medigen", "Medigen"], "Moderna": ["Moderna", "莫德納"], "leftover": ["剩餘", "剩餘量", "剩餘數", "剩量", "剩餘資料", "剩餘數字", "剩餘分佈", "剩餘分布"], "syn_verb": ["出現", "有"], "side_effect": ["副作用", "嚴重副作用"], "vaccine_verb": ["打完", "打過", "接種", "注射"], "Pfizer-BioNTech": ["BIOTECH", "BNT", "BioTech", "Biotech", "Pfizer-BioNTech", "biotech", "上海復興", "上海復興BNT", "輝瑞"]}
+userDefinedDICT = {"AZ": ["AZ", "AstraZeneca", "az", "牛津", "牛津/阿斯利康", "阿斯利康", "阿斯特捷利康"], "dose": ["第一劑", "第二劑", "第三劑"], "Taiwan": ["台灣", "臺灣", "本島", "本國", "全台", "全台灣", "全臺灣", "全島", "全臺", "全臺各地", "全國"], "Medigen": ["高端", "medigen", "Medigen"], "Moderna": ["Moderna", "莫德納"], "leftover": ["剩餘", "剩餘量", "剩餘數", "剩量", "剩餘資料", "剩餘數字", "剩餘分佈", "剩餘分布","剩餘狀況","剩餘情形"], "syn_verb": ["出現", "有"], "side_effect": ["副作用", "嚴重副作用"], "vaccine_verb": ["打完", "打過", "接種", "注射"], "Pfizer-BioNTech": ["BIOTECH", "BNT", "BioTech", "Biotech", "Pfizer-BioNTech", "biotech", "上海復興", "上海復興BNT", "輝瑞"]}
 vaccineDICT = userDefinedDICT["AZ"] + userDefinedDICT["Moderna"] + userDefinedDICT["Pfizer-BioNTech"] + userDefinedDICT["Medigen"]
 
 # 將符合句型的參數列表印出。這是 debug 或是開發用的。
