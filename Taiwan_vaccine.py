@@ -47,6 +47,7 @@ from requests import codes
 import math
 import json
 try:
+    print("success")
     from intent import Loki_side_effect
 except:
     from .intent import Loki_side_effect

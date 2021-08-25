@@ -14,16 +14,17 @@
         resultDICT    dict
 """
 import json
+
 DEBUG_side_effect = True
 userDefinedDICT = {"AZ": ["AstraZeneca", "az", "AZ", "牛津/阿斯利康", "牛津", "阿斯利康", "阿斯特捷利康"], "doze": ["第一劑", "第二劑", "第三劑"], "Moderna": ["Moderna", "莫德納"], "syn_verb": ["有", "出現"], "side_effect": ["副作用", "嚴重副作用"], "vaccine_verb": ["注射", "接種", "打完", "打過"], "Pfizer-BioNTech": ["Pfizer-BioNTech", "輝瑞", "BNT", "Biotech", "BioTech", "biotech", "BIOTECH"]}
 vaccinedict = userDefinedDICT["AZ"] + userDefinedDICT["Moderna"] + userDefinedDICT["Pfizer-BioNTech"]
 vaccinedict = vaccinedict + ["AstraZeneca", "Moderna", "Pfizer-BioNTech"]
 # 將符合句型的參數列表印出。這是 debug 或是開發用的。
 
-with open("side_effect.json", mode="r", encoding="utf-8") as file:
+with open("intent/side_effect.json", mode="r", encoding="utf-8") as file:
     sideeffectDict = json.loads(file.read())
 
-with open("hospital_immediately.json", mode="r", encoding="utf-8") as f:
+with open("intent/hospital_immediately.json", mode="r", encoding="utf-8") as f:
     hospitaldict = json.loads(f.read())
 
 def debugInfo(inputSTR, utterance):
