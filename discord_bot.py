@@ -1,7 +1,7 @@
 #!/user/bin/env python
 # -*- coding: utf-8 -*-
 
-import logging
+import logging #可以測試哪裡有問題
 import discord
 import json
 import re
