@@ -31,96 +31,92 @@ def debugInfo(inputSTR, utterance):
     if DEBUG_side_effect:
         print("[side_effect] {} ===> {}".format(inputSTR, utterance))
 
+def formalize_name(val, userDefinedDICT, resultDICT, resultSTR):
+    count = 0
+    for k in userDefinedDICT.keys():
+        if val in userDefinedDICT[k]:
+            if count == 0: resultDICT[resultSTR].append(k); count+=1
+            if count > 1: print(f"Name Error: Duplicate Names! ({val})")
+
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
     resultDICT["vaccine_shot"] = []
     resultDICT["side_effect"] = []
     resultDICT["severe_side_effect"] = []
-    if utterance == "[az][疫苗]副作用為何":
+
+    if utterance == "[az]疫苗[副作用]為何":
         if args[0] in vaccineDICT:
-            for k in userDefinedDICT.keys():
-                if args[0] in userDefinedDICT[k]:
-                    resultDICT["vaccine_shot"].append(k)
-                    resultDICT["side_effect"].append(sideeffectDict[k])
+            formalize_name(args[0], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[1] == "副作用":
+            resultDICT["side_effect"].append(args[1])
 
-    if utterance == "[az]副作用":
+    if utterance == "[az][副作用]":
         if args[0] in vaccineDICT:
-            for k in userDefinedDICT.keys():
-                if args[0] in userDefinedDICT[k]:
-                    resultDICT["vaccine_shot"].append(k)
-                    resultDICT["side_effect"].append(sideeffectDict[k])
+            formalize_name(args[0], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[1] == "副作用":
+            resultDICT["side_effect"].append(args[1])
 
-    if utterance == "[az]疫苗[會][有]哪些副作用":
+    if utterance == "[az]疫苗[會]有哪些[副作用]":
         if args[0] in vaccineDICT:
-            for k in userDefinedDICT.keys():
-                if args[0] in userDefinedDICT[k]:
-                    resultDICT["vaccine_shot"].append(k)
-                    resultDICT["side_effect"].append(sideeffectDict[k])
+            formalize_name(args[0], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[2] == "副作用":
+            resultDICT["side_effect"].append(args[2])
 
-    if utterance == "[打完][莫德納][後]，[出現]哪些嚴重副作用需要送醫":
+    if utterance == "[打完][莫德納][後]，[出現]哪些[嚴重副作用]需要送醫":
         if args[1] in vaccineDICT:
-            for k in userDefinedDICT.keys():
-                if args[1] in userDefinedDICT[k]:
-                    resultDICT["vaccine_shot"].append(k)
-                    resultDICT["severe_side_effect"].append(hospitaldict[k])
+            formalize_name(args[1], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[4] == "嚴重副作用":
+            resultDICT["severe_side_effect"].append(args[4])
 
-    if utterance == "[打完][莫德納]疫苗[後]，[出現]哪些嚴重副作用需要送醫":
+    if utterance == "[打完][莫德納]疫苗[後]，[出現]哪些[嚴重副作用]需要送醫":
         if args[1] in vaccineDICT:
-            for k in userDefinedDICT.keys():
-                if args[1] in userDefinedDICT[k]:
-                    resultDICT["vaccine_shot"].append(k)
-                    resultDICT["severe_side_effect"].append(hospitaldict[k])
+            formalize_name(args[1], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[4] == "嚴重副作用":
+            resultDICT["severe_side_effect"].append(args[4])
 
-    if utterance == "[第一劑][az][會][有]哪些副作用":
+    if utterance == "[第一劑][az][會]有哪些[副作用]":
         if args[1] in vaccineDICT:
-            for k in userDefinedDICT.keys():
-                if args[1] in userDefinedDICT[k]:
-                    resultDICT["vaccine_shot"].append(k)
-                    resultDICT["side_effect"].append(sideeffectDict[k])
+            formalize_name(args[1], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[3] == "副作用":
+            resultDICT["side_effect"].append(args[3])
 
 
-    if utterance == "[第一劑][az]副作用":
+    if utterance == "[第一劑][az][副作用]":
         if args[1] in vaccineDICT:
-            for k in userDefinedDICT.keys():
-                if args[1] in userDefinedDICT[k]:
-                    resultDICT["vaccine_shot"].append(k)
-                    resultDICT["side_effect"].append(sideeffectDict[k])
+            formalize_name(args[1], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[2] == "副作用":
+            resultDICT["side_effect"].append(args[2])
 
-    if utterance == "[第一劑][az]疫苗[會][有]哪些副作用":
+    if utterance == "[第一劑][az]疫苗[會][有]哪些[副作用]":
         if args[1] in vaccineDICT:
-            for k in userDefinedDICT.keys():
-                if args[1] in userDefinedDICT[k]:
-                    resultDICT["vaccine_shot"].append(k)
-                    resultDICT["side_effect"].append(sideeffectDict[k])
+            formalize_name(args[1], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[4] == "副作用":
+            resultDICT["side_effect"].append(args[4])
 
-    if utterance == "[第一劑][az]疫苗副作用":
+    if utterance == "[第一劑][az]疫苗[副作用]":
         if args[1] in vaccineDICT:
-            for k in userDefinedDICT.keys():
-                if args[1] in userDefinedDICT[k]:
-                    resultDICT["vaccine_shot"].append(k)
-                    resultDICT["side_effect"].append(sideeffectDict[k])
+            formalize_name(args[1], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[2] == "副作用":
+            resultDICT["side_effect"].append(args[2])
 
-    if utterance == "請問[az]疫苗副作用為何":
+    if utterance == "請問[az]疫苗[副作用]為何":
         if args[0] in vaccineDICT:
-            for k in userDefinedDICT.keys():
-                if args[0] in userDefinedDICT[k]:
-                    resultDICT["vaccine_shot"].append(k)
-                    resultDICT["side_effect"].append(sideeffectDict[k])
-    if utterance == "[az]嚴重副作用":
-        # write your code here
-        pass
+            formalize_name(args[0], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[1] == "副作用":
+            resultDICT["side_effect"].append(args[1])
 
-    if utterance == "az疫苗[會]有哪些副作用":
-        # write your code here
-        pass
+    if utterance == "[第一劑][az][會]有哪些[副作用]":
+        if args[1] in vaccineDICT:
+            formalize_name(args[1], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[3] == "副作用":
+            resultDICT["side_effect"].append(args[3])
+            
 
-    if utterance == "第一劑az[會]有哪些副作用":
-        # write your code here
-        pass
-
-    if utterance == "第一劑az疫苗[會]有哪些副作用":
-        # write your code here
-        pass
+    if utterance == "[第一劑][az]疫苗[會]有哪些[副作用]":
+        if args[1] in vaccineDICT:
+            formalize_name(args[1], userDefinedDICT, resultDICT, "vaccine_shot")
+        if args[3] == "副作用":
+            resultDICT["side_effect"].append(args[3])
     
 
     return resultDICT
