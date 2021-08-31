@@ -211,5 +211,4 @@ if __name__ == "__main__":
         # resultDICT = runLoki([inputSTR], filterLIST)
         # print("Result => {}".format(resultDICT))
     resultDICT = runLoki(inputLIST, filterLIST)
-    #print("Result => {}".format(resultDICT))
-    print(resultDICT['嚴重副作用'][0])
+    print("Result => {}".format(resultDICT))
