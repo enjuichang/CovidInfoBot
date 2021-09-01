@@ -99,16 +99,7 @@ async def on_message(message):
                         mscDICT[client.user.id]["vaccine_stock"][m] = lokiResultDICT["vaccine_stock"][m]
                 elif k == "msg":
                     replySTR += "\nutterance not available."
-                #   print("Loki msg:", replySTR, "\n")
-                #     replySTR = lokiResultDICT[k]
-                #     if "loan_type" in lokiResultDICT:
-                #         mscDICT[client.user.id]["loan_type"] = lokiResultDICT["loan_type"]
-                # if mscDICT[client.user.id]["inquiry_type"] == {}:
-                #     replySTR += "\n請問您想知道關於疫苗的哪些資訊呢？"
-                #     print("Loki msg:", replySTR, "\n")
-                # if mscDICT[client.user.id]["side_effect"] == {} and mscDICT[client.user.id]["vaccine_stock"] == {}:
-                #     replySTR += "\n請問您想知道關於疫苗的哪些資訊呢？"
-                #     print("Loki msg:", replySTR, "\n")
+
                 elif k == "confirm":
                     if lokiResultDICT["confirm"]:
                         replySTR = "好的，謝謝。"
@@ -141,9 +132,10 @@ async def on_message(message):
 
             ### vaccine_stock 確認 ###
             if set(sideEffectTemplate.keys()).difference(mscDICT[client.user.id]["vaccine_stock"]) == set() and replySTR == "":
-                replySTR = """本機已了解您的需求，您查詢的疫苗廠牌為{}，
-                                                    查詢地區為{}""".format(mscDICT[client.user.id]["vaccine_stock"]["vaccine_shot"],
-                                                                        mscDICT[client.user.id]["vaccine_stock"]["location"]).replace("    ", "")
+                # replySTR = """本機已了解您的需求，您查詢的疫苗廠牌為{}，
+                #                                     查詢地區為{}""".format(mscDICT[client.user.id]["vaccine_stock"]["vaccine_shot"],
+                #                                                         mscDICT[client.user.id]["vaccine_stock"]["location"]).replace("    ", "")
+                replySTR = vaccine_stock_api.write_response(mscDICT[client.user.id]["vaccine_stock"])
                 mscDICT[client.user.id]["completed"] = True
 
         print("mscDICT =")
