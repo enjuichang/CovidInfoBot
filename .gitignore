@@ -1,3 +1,5 @@
 account.info
 .*
 *.pyc
+.DS_store
+test.py

@@ -205,7 +205,7 @@ if __name__ == "__main__":
     # print("")
 
     # 輸入其它句子試看看
-    inputLIST = ["打完az疫苗後，出現哪些嚴重副作用需要送醫", "台中剩下多少劑疫苗"]
+    inputLIST = ["請問台南疫苗剩餘量"]
     filterLIST = []
     # for inputSTR in inputLIST:
         # resultDICT = runLoki([inputSTR], filterLIST)
