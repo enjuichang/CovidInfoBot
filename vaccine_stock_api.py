@@ -55,10 +55,10 @@ def write_response(inputDICT):
     }
     outputDICT = {}
     if set(vaccineStockTemplate.keys()).difference(inputDICT.keys()) == set():
-        outputDICT["date"] = vaccine_stockDF['date']
-        outputDICT["vaccine_shot"] = inputDICT["vaccine_shot"][0]
-        outputDICT["location"] = inputDICT['location'][0]
-        outputDICT["quantity"] = vaccine_stockDF[inputDICT['location'][0]][inputDICT["vaccine_shot"][0]]
+        outputDICT["date"] = vaccine_stockDF['date'][0]
+        outputDICT["vaccine_shot"] = inputDICT["vaccine_shot"][0] 
+        outputDICT["location"] = inputDICT['location']# Need to remove [0]
+        outputDICT["quantity"] = vaccine_stockDF[vaccine_stockDF.location == inputDICT['location']].loc[0, outputDICT["vaccine_shot"]] # Need to remove [0]
         outputSTR = """本機回覆： [{}] 為止, [{}] 疫苗在 [{}] 還有 [{}]劑庫存。""".format(outputDICT["date"],outputDICT["vaccine_shot"],outputDICT["location"],outputDICT["quantity"]).replace("   ", "")
     else:
         outputSTR = "ERROR: number of keys do not match."
@@ -68,8 +68,9 @@ def write_response(inputDICT):
     return outputSTR
 
 if __name__ == "__main__":
-    inputLIST = ["台中剩下多少劑AZ疫苗"]
+    inputLIST = ["臺北市剩下多少劑AZ疫苗"]
     filterLIST=[]
     loki_result = covid_info_bot.runLoki(inputLIST, filterLIST)
+    loki_result['location']= "臺北市"
     response = write_response(loki_result)
     print(response)
