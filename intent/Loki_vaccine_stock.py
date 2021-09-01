@@ -39,12 +39,12 @@ def formalize_name(val, userDefinedDICT, resultDICT, resultSTR):
 
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
-    resultDICT['type'] = []
+    resultDICT['vaccine_shot'] = []
     resultDICT['location'] = []
 
     if utterance == "[可以]幫[我]查詢[AZ]在[台北]的[剩餘量]":
         if args[4] in userDefinedDICT['leftover']:
-            if args[2] in vaccineDICT: formalize_name(args[2], userDefinedDICT, resultDICT, 'type')
+            if args[2] in vaccineDICT: formalize_name(args[2], userDefinedDICT, resultDICT, 'vaccine_shot')
             resultDICT['location'].append(args[3])
 
     if utterance == "[可以]幫[我]查詢[AZ]疫苗在[台北]的[剩餘量]":
@@ -53,7 +53,7 @@ def getResult(inputSTR, utterance, args, resultDICT):
             resultDICT['location'].append(args[3])
 
     if utterance == "[可以]跟[我]講[台北]疫苗剩下多少嗎？":
-        resultDICT['type'].append('all')
+        resultDICT['vaccine_shot'].append('all')
         resultDICT['location'].append(args[2])
 
     if utterance == "[台中]剩下多少[AZ]疫苗":
@@ -66,11 +66,11 @@ def getResult(inputSTR, utterance, args, resultDICT):
         resultDICT['location'].append(args[0])
 
     if utterance == "[台中]剩下多少[劑]疫苗":
-        resultDICT['type'].append('all')
+        resultDICT['vaccine_shot'].append('all')
         resultDICT['location'].append(args[0])
 
     if utterance == "[台中]剩下多少疫苗":
-        resultDICT['type'].append('all')
+        resultDICT['vaccine_shot'].append('all')
         resultDICT['location'].append(args[0])
 
     if utterance == "[台北]還有幾[劑][AZ]疫苗？":
@@ -78,12 +78,12 @@ def getResult(inputSTR, utterance, args, resultDICT):
         resultDICT['location'].append(args[0])
 
     if utterance == "[台北]還有幾[劑]疫苗？":
-        resultDICT['type'].append('all')
+        resultDICT['vaccine_shot'].append('all')
         resultDICT['location'].append(args[0])
 
     if utterance == "[我]想查詢[台北]疫苗[剩餘量]":
         if args[2] in userDefinedDICT['leftover']:
-            resultDICT['type'].append('all')
+            resultDICT['vaccine_shot'].append('all')
             resultDICT['location'].append(args[1])
 
     if utterance == "[我]想知道[AZ]在[台北]的[剩餘量]":
@@ -103,12 +103,12 @@ def getResult(inputSTR, utterance, args, resultDICT):
 
     if utterance == "[我]想知道[全臺]疫苗[剩餘分佈]":
         if args[2] in userDefinedDICT['leftover']:
-            resultDICT['type'].append('all')
+            resultDICT['vaccine_shot'].append('all')
             resultDICT['location'].append(args[1])
 
     if utterance == "[我]想知道[台北]疫苗[剩餘量]":
         if args[2] in userDefinedDICT['leftover']:
-            resultDICT['type'].append('all')
+            resultDICT['vaccine_shot'].append('all')
             resultDICT['location'].append(args[1])
 
     if utterance == "[我]要查詢[AZ]在[台北]的[剩餘量]":
@@ -118,12 +118,12 @@ def getResult(inputSTR, utterance, args, resultDICT):
 
     if utterance == "[我]要查詢[台北]疫苗[剩餘量]":
         if args[2] in userDefinedDICT['leftover']:
-            resultDICT['type'].append('all')
+            resultDICT['vaccine_shot'].append('all')
             resultDICT['location'].append(args[1])
 
     if utterance == "[我]要知道[台北]疫苗[剩餘量]":
         if args[2] in userDefinedDICT['leftover']:
-            resultDICT['type'].append('all')
+            resultDICT['vaccine_shot'].append('all')
             resultDICT['location'].append(args[1])
 
 
@@ -135,7 +135,7 @@ def getResult(inputSTR, utterance, args, resultDICT):
 
     if utterance == "[能]給[我][全台]疫苗[剩餘數]":
         if args[3] in userDefinedDICT['leftover']:
-            resultDICT['type'].append('all')
+            resultDICT['vaccine_shot'].append('all')
             resultDICT['location'].append(args[2])
 
     if utterance == "幫[我]查詢[AZ]在[台北]的[剩餘量]":
@@ -155,7 +155,7 @@ def getResult(inputSTR, utterance, args, resultDICT):
 
     if utterance == "給[我][全台]疫苗[剩餘數]":
         if args[2] in userDefinedDICT['leftover']:
-            resultDICT['type'].append('all')
+            resultDICT['vaccine_shot'].append('all')
             resultDICT['location'].append(args[1])
 
 
