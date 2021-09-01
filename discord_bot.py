@@ -7,7 +7,7 @@ import json
 import re
 from covid_info_bot import runLoki
 
-import response_parser
+import vaccine_stock_api
 from pprint import pprint
 
 
@@ -114,23 +114,10 @@ async def on_message(message):
                     else:
                         replySTR = "請問您的意思是？"
 
-            ### inquiry_type 確認 ###
+            ### inquiry_type 多輪對話的問句 ###
             if mscDICT[client.user.id]["inquiry_type"] == {} and replySTR == "":    
                 replySTR = '\n請問要問關於疫苗的甚麼資訊呢？'
 
-            ### side_effect 確認 ###
-            if set(sideEffectTemplate.keys()).difference(mscDICT[client.user.id]["side_effect"]) == set() and replySTR == "":
-                replySTR = """您是想問[{}]疫苗在[{}]的副作用嗎？""".format(mscDICT[client.user.id]["side_effect"]["vaccine_shot"],
-                                                                        mscDICT[client.user.id]["side_effect"]["side_effect"]).replace("    ", "")
-                mscDICT[client.user.id]["completed"] = True
-
-            ### vaccine_stock 確認 ###
-            if set(sideEffectTemplate.keys()).difference(mscDICT[client.user.id]["vaccine_stock"]) == set() and replySTR == "":
-                replySTR = """本機已了解您的需求，您查詢的疫苗廠牌為{}，
-                                                    查詢地區為{}""".format(mscDICT[client.user.id]["vaccine_stock"]["vaccine_shot"],
-                                                                        mscDICT[client.user.id]["vaccine_stock"]["location"]).replace("    ", "")
-                mscDICT[client.user.id]["completed"] = True
-                
             ### side_effect 多輪對話的問句 ###
             if mscDICT[client.user.id]["inquiry_type"] == "side_effect" and replySTR == "":   
                 if "vaccine_shot" not in mscDICT[client.user.id]["side_effect"]:
@@ -145,6 +132,18 @@ async def on_message(message):
                 elif "location" not in mscDICT[client.user.id]["vaccine_stock"]:
                     replySTR = "請問您要詢問哪個地區的[{}]疫苗庫存呢？".format(mscDICT[client.user.id]["vaccine_stock"]["vaccine_shot"])
     
+            ### side_effect 確認 ###
+            if set(sideEffectTemplate.keys()).difference(mscDICT[client.user.id]["side_effect"]) == set() and replySTR == "":
+                replySTR = """您是想問[{}]疫苗在[{}]的副作用嗎？""".format(mscDICT[client.user.id]["side_effect"]["vaccine_shot"],
+                                                                        mscDICT[client.user.id]["side_effect"]["side_effect"]).replace("    ", "")
+                mscDICT[client.user.id]["completed"] = True
+
+            ### vaccine_stock 確認 ###
+            if set(sideEffectTemplate.keys()).difference(mscDICT[client.user.id]["vaccine_stock"]) == set() and replySTR == "":
+                replySTR = """本機已了解您的需求，您查詢的疫苗廠牌為{}，
+                                                    查詢地區為{}""".format(mscDICT[client.user.id]["vaccine_stock"]["vaccine_shot"],
+                                                                        mscDICT[client.user.id]["vaccine_stock"]["location"]).replace("    ", "")
+                mscDICT[client.user.id]["completed"] = True
 
         print("mscDICT =")
         pprint(mscDICT)

@@ -45,7 +45,7 @@ def getResult(inputSTR, utterance, args, resultDICT):
     if utterance == "[可以]幫[我]查詢[AZ]在[台北]的[剩餘量]":
         if args[4] in userDefinedDICT['leftover']:
             if args[2] in vaccineDICT: formalize_name(args[2], userDefinedDICT, resultDICT, 'vaccine_shot')
-            resultDICT['location'].append(args[3])
+            if args[3] in locationDICT: formalize_name(args[3], userDefinedDICT, resultDICT, 'location')
 
     if utterance == "[可以]幫[我]查詢[AZ]疫苗在[台北]的[剩餘量]":
         if args[4] in userDefinedDICT['leftover']:
