@@ -42,6 +42,7 @@ def getLokiResult(inputSTR):
     punctuationPat = re.compile("[,\.\?:;，。？、：；\n]+")
     inputLIST = punctuationPat.sub("\n", inputSTR).split("\n")
     filterLIST = []
+    print(inputLIST)
     resultDICT = runLoki(inputLIST, filterLIST)
     print("Loki Result => {}".format(resultDICT))
     return resultDICT
@@ -56,8 +57,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.name != "bot_test":
-        return
+    # if message.channel.name != "dt_intern":
+    #     return
 
     if not re.search("<@[!&]{}> ?".format(client.user.id), message.content):    # 只有 @Bot 才會回應
         return
