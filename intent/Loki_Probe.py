@@ -27,7 +27,7 @@ def getResult(inputSTR, utterance, args, resultDICT):
     resultDICT["inquiry_type"] = []
     resultDICT["confirm"] = []
     if utterance == "[az]疫苗[剩餘量]":
-        if args[1] in userDefinedDICT["leftover"]:
+        if args[1] in userDefinedDICT["leftover"] and args[1].endswith("量"):
             resultDICT["inquiry_type"] = "leftover"
         elif args[1] in userDefinedDICT["side_effect"]:
             resultDICT["inquiry_type"] = "side_effect"

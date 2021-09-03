@@ -147,12 +147,12 @@ if __name__ == "__main__":
     args = argParser.parse_args()
 
     #<manual_section>
-    manualMode = False
+    manualMode = True
     if manualMode == False:
         pass
     else:
-        args.oldIntentDirectory = ""
-        args.newIntentDirectory = ""
+        args.oldIntentDirectory = "./"
+        args.newIntentDirectory = "./intent_new"
     #</manual_section>
 
 

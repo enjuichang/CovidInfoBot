@@ -24,15 +24,18 @@ def debugInfo(inputSTR, utterance):
 
 def groupnumber(args, userDefinedDICT, resultDICT, resultSTR): #避免有太多類別
     count=0
-    if args in userDefinedDICT["group"]:
+    if args in userDefinedDICT["group_num"]:
         if count == 0:
             resultDICT[resultSTR].append(args)
             count += 1
         if count > 0:
             print("太多類囉! 您想要哪一個?")
+    else:
+        pass
 
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
+    resultDICT["group_num"] = []
     if utterance == "[第一類][族群]":
         groupnumber(args[0], userDefinedDICT, resultDICT, "group_num")
 
