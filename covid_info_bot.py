@@ -49,13 +49,16 @@ import json
 try:
     from intent import Loki_vaccine_stock
     from intent import Loki_side_effect
+    from intent import Loki_Probe
+    from intent import Loki_group
 except:
     from .intent import Loki_vaccine_stock
     from .intent import Loki_side_effect
+    from .intent import Loki_Probe
+    from .intent import Loki_group
 
 with open("account.info", mode="r", encoding="utf-8") as file:
     useraccountdict = json.loads(file.read())
-
 LOKI_URL = "https://api.droidtown.co/Loki/BulkAPI/"
 USERNAME = useraccountdict["username"]
 LOKI_KEY = useraccountdict["loki_project_key"]
@@ -176,10 +179,18 @@ def runLoki(inputLIST, filterLIST=[]):
                 # vaccine_stock
                 if lokiRst.getIntent(index, resultIndex) == "vaccine_stock":
                     resultDICT = Loki_vaccine_stock.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
-                
+
                 # side_effect
                 if lokiRst.getIntent(index, resultIndex) == "side_effect":
                     resultDICT = Loki_side_effect.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
+
+                # Probe
+                if lokiRst.getIntent(index, resultIndex) == "Probe":
+                    resultDICT = Loki_Probe.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
+
+                # group
+                if lokiRst.getIntent(index, resultIndex) == "group":
+                    resultDICT = Loki_group.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
 
     else:
         resultDICT = {"msg": lokiRst.getMessage()}
@@ -192,23 +203,32 @@ def testLoki(inputLIST, filterLIST):
 
 
 if __name__ == "__main__":
-    # # vaccine_stock
-    # print("[TEST] vaccine_stock")
-    # inputLIST = ['台中剩下多少疫苗','台中剩下多少AZ疫苗','台中剩下多少劑疫苗','台北還有幾劑疫苗？','給我全台疫苗剩餘數','台中剩下多少劑AZ疫苗','台北還有幾劑AZ疫苗？','給我全台AZ疫苗剩餘數','能給我全台疫苗剩餘數','能給我全台AZ疫苗剩餘數','我想查詢台北疫苗剩餘量','我想知道台北疫苗剩餘量','我要查詢台北疫苗剩餘量','我要知道台北疫苗剩餘量','幫我查詢AZ在台北的剩餘量','我想知道AZ在台北的剩餘量','我要查詢AZ在台北的剩餘量','我想知道全臺疫苗剩餘分佈','可以幫我查詢AZ在台北的剩餘量','幫我查詢AZ疫苗在台北的剩餘量','我想知道AZ疫苗在台北的剩餘量','我想知道全臺高端疫苗剩餘分佈','可以跟我講台北疫苗剩下多少嗎？','可以幫我查詢AZ疫苗在台北的剩餘量']
-    # testLoki(inputLIST, ['vaccine_stock'])
-    # print("")
+    # vaccine_stock
+    print("[TEST] vaccine_stock")
+    inputLIST = ['台中剩下多少疫苗','台中剩下多少AZ疫苗','台中剩下多少劑疫苗','台北還有幾劑疫苗？','給我全台疫苗剩餘數','台中剩下多少劑AZ疫苗','台北還有幾劑AZ疫苗？','給我全台AZ疫苗剩餘數','能給我全台疫苗剩餘數','能給我全台AZ疫苗剩餘數','我想查詢台北疫苗剩餘量','我想知道台北疫苗剩餘量','我要查詢台北疫苗剩餘量','我要知道台北疫苗剩餘量','幫我查詢AZ在台北的剩餘量','我想知道AZ在台北的剩餘量','我要查詢AZ在台北的剩餘量','我想知道全臺疫苗剩餘分佈','可以幫我查詢AZ在台北的剩餘量','幫我查詢AZ疫苗在台北的剩餘量','我想知道AZ疫苗在台北的剩餘量','我想知道全臺高端疫苗剩餘分佈','可以跟我講台北疫苗剩下多少嗎？','可以幫我查詢AZ疫苗在台北的剩餘量']
+    testLoki(inputLIST, ['vaccine_stock'])
+    print("")
 
-    # # side_effect
-    # print("[TEST] side_effect")
-    # inputLIST = ['az副作用','第一劑az副作用','az疫苗副作用為何','第一劑az疫苗副作用','az疫苗會有哪些副作用','請問az疫苗副作用為何','第一劑az會有哪些副作用','第一劑az疫苗會有哪些副作用','打完莫德納後，出現哪些嚴重副作用需要送醫','打完莫德納疫苗後，出現哪些嚴重副作用需要送醫']
-    # testLoki(inputLIST, ['side_effect'])
-    # print("")
+    # side_effect
+    print("[TEST] side_effect")
+    inputLIST = ['az副作用','第一劑az副作用','az疫苗副作用為何','第一劑az疫苗副作用','請問az疫苗副作用為何','第一劑az會有哪些副作用','第一劑az疫苗會有哪些副作用','打完莫德納後，出現哪些嚴重副作用需要送醫','打完莫德納疫苗後，出現哪些嚴重副作用需要送醫']
+    testLoki(inputLIST, ['side_effect'])
+    print("")
+
+    # Probe
+    print("[TEST] Probe")
+    inputLIST = ['是','不是','疫苗剩餘量','az疫苗剩餘量','台南疫苗剩餘量','台南剩下多少疫苗','我想要知道疫苗資訊','台北還剩下多少az疫苗']
+    testLoki(inputLIST, ['Probe'])
+    print("")
+
+    # group
+    print("[TEST] group")
+    inputLIST = ['第一類族群','第一類接種對象']
+    testLoki(inputLIST, ['group'])
+    print("")
 
     # 輸入其它句子試看看
-    inputLIST = ["az疫苗"]
+    inputLIST = ["az副作用"]
     filterLIST = []
-    for inputSTR in inputLIST:
-        resultDICT = runLoki([inputSTR], filterLIST)
-        print("Result => {}".format(resultDICT))
-    # resultDICT = runLoki(inputLIST, filterLIST)
-    # print("Result => {}".format(resultDICT))
+    resultDICT = runLoki(inputLIST, filterLIST)
+    print("Result => {}".format(resultDICT))
