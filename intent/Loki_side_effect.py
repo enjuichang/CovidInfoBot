@@ -17,7 +17,7 @@
 import json
 
 with open("json/side_effect.json", mode="r", encoding="utf-8") as file:
-    sideeffectDict = json.loads(file.read())
+    sideeffectDICT = json.loads(file.read())
 
 with open("json/hospital_immediately.json", mode="r", encoding="utf-8") as f:
     hospitalDICT = json.loads(f.read())
@@ -37,8 +37,8 @@ def formalize_name_side_effect(val, resultDICT, resultSTR, resultSTR2):
         if val in userDefinedDICT[k]:
             if count == 0: 
                 resultDICT[resultSTR].append(k)
-                side_effect = sideeffectDict[k]
-                resultDICT[resultSTR2].appened(side_effect)
+                side_effect = sideeffectDICT[k]
+                resultDICT[resultSTR2].append(side_effect)
                 count+=1
             if count > 1: 
                 print(f"Name Error: Duplicate Names! ({val})")
@@ -47,10 +47,12 @@ def formalize_name_severe_side_effect(val, resultDICT, resultSTR, resultSTR2):
     count = 0
     for k in userDefinedDICT.keys():
         if val in userDefinedDICT[k]:
+            print(resultDICT)
             if count == 0: 
                 resultDICT[resultSTR].append(k)
                 severe_side_effect= hospitalDICT[k]
-                resultDICT[resultSTR2].appened(severe_side_effect)
+                print(resultDICT)
+                resultDICT[resultSTR2].append(severe_side_effect)
                 count+=1
             if count > 1: 
                 print(f"Name Error: Duplicate Names! ({val})")
