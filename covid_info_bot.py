@@ -233,6 +233,5 @@ if __name__ == "__main__":
     inputLIST = ["我想知道az副作用"]
     filterLIST = []
     resultDICT = runLoki(inputLIST, filterLIST)
-    print(" ")
     print(resultDICT)
     # print("Result => {}".format(resultDICT))

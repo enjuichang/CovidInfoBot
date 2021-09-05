@@ -48,8 +48,9 @@ def formalize_name(val, userDefinedDICT, resultDICT, resultSTR):
 
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
-    resultDICT['vaccine_shot'] = []
-    resultDICT['location'] = []
+    if resultDICT == {}:
+        resultDICT['vaccine_shot'] = []
+        resultDICT['location'] = []
 
     if utterance == "[可以]幫[我]查詢[AZ]在[台北]的[剩餘量]":
         if args[4] in userDefinedDICT['leftover']:
