@@ -78,7 +78,8 @@ async def on_message(message):
             return
 
         lokiResultDICT = getLokiResult(msgSTR)    # 取得 Loki 回傳結果
-
+        
+        print(lokiResultDICT)
         if lokiResultDICT:
             if client.user.id not in mscDICT:    # 判斷 User 是否為第一輪對話
                 mscDICT[client.user.id] = { 
