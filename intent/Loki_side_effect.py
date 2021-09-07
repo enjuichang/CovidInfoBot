@@ -45,7 +45,6 @@ def formalize_name_severe_side_effect(val, resultDICT, resultSTR, resultSTR2):
     count = 0
     for k in userDefinedDICT.keys():
         if val in userDefinedDICT[k]:
-            print(resultDICT)
             if count == 0: 
                 resultDICT[resultSTR].append(k)
                 severe_side_effect= hospitalDICT[k]
@@ -58,7 +57,6 @@ def formalize_name_severe_side_effect(val, resultDICT, resultSTR, resultSTR2):
 
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
-    print(resultDICT)
     if resultDICT == {}:
         resultDICT["vaccine_shot"] = []
         resultDICT["side_effect"] = []
