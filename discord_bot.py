@@ -19,11 +19,13 @@ client = discord.Client()
 sideEffectTemplate ={
                 "vaccine_shot":"",
                  "side_effect": "",
+                 "side_effect_var":""
                  }
 
 vaccineStockTemplate = {
                 "vaccine_shot":"",
-                "location":""
+                "location":"",
+                "vaccine_stock":""
                 }
 
 mscDICT = {
@@ -95,23 +97,21 @@ async def on_message(message):
             if k == "inquiry_type":
                 mscDICT[client.user.id]["inquiry_type"] = lokiResultDICT["inquiry_type"]
 
-            if k == "side_effect":
+            if k == "side_effect_var":
                 for c in lokiResultDICT:
                     mscDICT[client.user.id]["side_effect"][c] = lokiResultDICT[c]
                     mscDICT[client.user.id]["inquiry_type"] = "side_effect"
 
             elif k == "vaccine_stock":
                 for c in lokiResultDICT:
-                    mscDICT[client.user.id]["vaccine_stock"][c] = lokiResultDICT["vaccine_stock"][c]
+                    mscDICT[client.user.id]["vaccine_stock"][c] = lokiResultDICT[c]
                     mscDICT[client.user.id]["inquiry_type"] = "vaccine_stock"
-            elif k == "msg":
-                replySTR = "utterance not available."
 
-            elif k == "confirm":
-                if lokiResultDICT["confirm"]:
-                    replySTR = "好的，謝謝。"
-                else:
-                    replySTR = "請問您的意思是？"
+            # elif k == "confirm":
+            #     if lokiResultDICT["confirm"]:
+            #         replySTR = "好的，謝謝。"
+            #     else:
+            #         replySTR = "請問您的意思是？"
 
         ### inquiry_type 多輪對話的問句 ###
         if mscDICT[client.user.id]["inquiry_type"] == {} and replySTR == "":    
@@ -133,17 +133,18 @@ async def on_message(message):
 
         ### side_effect 確認 ###
         if set(sideEffectTemplate.keys()).difference(mscDICT[client.user.id]["side_effect"]) == set() and replySTR == "":
-            for i in mscDICT[client.user.id]["side_effect"]:
-                print(i)
-            replySTR = """{}疫苗的副作用是{}嗎？""".format(mscDICT[client.user.id]["side_effect"]["vaccine_shot"],
-                                                                    mscDICT[client.user.id]["side_effect"]["side_effect"]).replace("    ", "")
+            for i in range(len(mscDICT[client.user.id]["side_effect"]["vaccine_shot"])):
+                if mscDICT[client.user.id]["side_effect"]["side_effect"]:
+                    replySTR += """{}疫苗的常見副作用是{}。\n""".format(mscDICT[client.user.id]["side_effect"]["vaccine_shot"][i],
+                                                                    mscDICT[client.user.id]["side_effect"]["side_effect"][i])
+                if mscDICT[client.user.id]["side_effect"]["severe_side_effect"]:
+                    replySTR += """{}疫苗的常見副作用是{}。\n""".format(mscDICT[client.user.id]["side_effect"]["vaccine_shot"][i],
+                                                                    mscDICT[client.user.id]["side_effect"]["severe_side_effect"][i])
+
             mscDICT[client.user.id]["completed"] = True
 
         ### vaccine_stock 確認 ###
-        if set(sideEffectTemplate.keys()).difference(mscDICT[client.user.id]["vaccine_stock"]) == set() and replySTR == "":
-            # replySTR = """本機已了解您的需求，您查詢的疫苗廠牌為{}，
-            #                                     查詢地區為{}""".format(mscDICT[client.user.id]["vaccine_stock"]["vaccine_shot"],
-            #                                                         mscDICT[client.user.id]["vaccine_stock"]["location"]).replace("    ", "")
+        if set(vaccineStockTemplate.keys()).difference(mscDICT[client.user.id]["vaccine_stock"]) == set() and replySTR == "":
             replySTR = vaccine_stock_api.write_response(mscDICT[client.user.id]["vaccine_stock"])
             mscDICT[client.user.id]["completed"] = True
 
@@ -162,10 +163,5 @@ async def on_message(message):
     print("[MSG ERROR] {}".format(str(e)))
 
 
-
-
-
 if __name__ == "__main__":
     client.run(accountDICT["discord_token"])
-
-    #getLokiResult("我想辦房屋貸款，我是一位會計師")

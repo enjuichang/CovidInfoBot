@@ -72,9 +72,7 @@ def getResult(inputSTR, utterance, args, resultDICT):
 
     if utterance == "[az][副作用]":
         if args[0] in vaccineDICT and args[1] == "副作用":
-            print(args[0],args[1])
             formalize_name_side_effect(args[0], resultDICT, "vaccine_shot", "side_effect")
-            print(resultDICT)
         elif args[0] in vaccineDICT and args[1] == "嚴重副作用":
             formalize_name_severe_side_effect(args[0], resultDICT, "vaccine_shot", "severe_side_effect")
         else:
@@ -139,5 +137,5 @@ def getResult(inputSTR, utterance, args, resultDICT):
             formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
         else:
             pass
-    
+    resultDICT["side_effect_var"] = []
     return resultDICT
