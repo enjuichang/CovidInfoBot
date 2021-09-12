@@ -177,6 +177,7 @@ def runLoki(inputLIST, filterLIST=[]):
     if lokiRst.getStatus():
         for index, key in enumerate(inputLIST):
             for resultIndex in range(0, lokiRst.getLokiLen(index)):
+                # 問peter(get_intent)
                 # vaccine_stock
                 if lokiRst.getIntent(index, resultIndex) == "vaccine_stock":
                     resultDICT = Loki_vaccine_stock.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
@@ -212,13 +213,13 @@ if __name__ == "__main__":
 
     # side_effect
     # print("[TEST] side_effect")
-    # inputLIST = ['az副作用','第一劑az副作用','az疫苗副作用為何','第一劑az疫苗副作用','請問az疫苗副作用為何','第一劑az會有哪些副作用','第一劑az疫苗會有哪些副作用','打完莫德納後，出現哪些嚴重副作用需要送醫','打完莫德納疫苗後，出現哪些嚴重副作用需要送醫']
+    # inputLIST = ['az副作用','az嚴重副作用','az疫苗副作用','第一劑az副作用','az疫苗嚴重副作用','第一劑az疫苗副作用','請問az疫苗副作用為何','第一劑az會有哪些副作用','第一劑az疫苗會有哪些副作用','打完莫德納後，出現哪些嚴重副作用需要送醫','打完莫德納疫苗後，出現哪些嚴重副作用需要送醫']
     # testLoki(inputLIST, ['side_effect'])
     # print("")
 
     # Probe
     # print("[TEST] Probe")
-    # inputLIST = ['是','不是','疫苗剩餘量','az疫苗剩餘量','台南疫苗剩餘量','台南剩下多少疫苗','我想要知道疫苗資訊','台北還剩下多少az疫苗']
+    # inputLIST = ['是','不是','疫苗剩餘量','az疫苗剩餘量','台南疫苗剩餘量','台南剩下多少疫苗','我想要知道疫苗資訊','我想要知道台北疫苗剩餘量']
     # testLoki(inputLIST, ['Probe'])
     # print("")
 
