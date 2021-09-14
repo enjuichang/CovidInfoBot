@@ -203,18 +203,6 @@ def testLoki(inputLIST, filterLIST):
     for i in range(0, math.ceil(len(inputLIST) / INPUT_LIMIT)):
         resultDICT = runLoki(inputLIST[i*INPUT_LIMIT:(i+1)*INPUT_LIMIT], filterLIST)
 
-# 將bot收到的inputSTR轉換成inputLIST給runLoki()執行
-def covid_info_botRunLoki(inputSTR, filterLIST):
-    punctuationPat = re.compile("[, \.\?:;，。？、：；\n]+")
-    inputLIST = punctuationPat.sub("\n", inputSTR).split("\n")
-
-    resultDICT = runLoki(inputLIST, filterLIST)
-    print("Loki Result => {}".format(resultDICT))
-
-    if "msg" in resultDICT.keys() and resultDICT["msg"] == "No Match Intent!":
-        return False
-    else:
-        return resultDICT
 
 if __name__ == "__main__":
     # vaccine_stock
@@ -242,19 +230,7 @@ if __name__ == "__main__":
     # print("")
 
     # 輸入其它句子試看看
-
-
-    inputLIST = ["az副作用"]
-    filterLIST = []
-    resultDICT = runLoki(inputLIST, filterLIST)
-    print(" ")
-    # for i in resultDICT:
-    #     if resultDICT[i] != None:
-    #         print(resultDICT[i])
-    #     else:
-    #         pass
-
-    inputLIST = ["我想知道az副作用"]
+    inputLIST = ["az嚴重副作用"]
     filterLIST = []
     resultDICT = runLoki(inputLIST, filterLIST)
     print(resultDICT)
