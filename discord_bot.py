@@ -38,15 +38,13 @@ with open("account.info", encoding="utf-8") as f:
 # 另一個寫法是：accountDICT = json.load(open("account.info", encoding="utf-8"))
 
 
-punctuationPat = re.compile("[,\.\?:;，。？、：；\n]+")
-
 def getLokiResult(inputSTR):
     punctuationPat = re.compile("[,\.\?:;，。？、：；\n]+")
     inputLIST = punctuationPat.sub("\n", inputSTR).split("\n")
     filterLIST = []
     resultDICT = runLoki(inputLIST, filterLIST)
     print("Loki Result => {}".format(resultDICT))
-    return resultDICT
+    return resultDICT, 
 
 
 
@@ -79,6 +77,8 @@ async def on_message(message):
         return
 
     lokiResultDICT = getLokiResult(msgSTR)    # 取得 Loki 回傳結果
+    logging.info(lokiResultDICT)  
+
     if lokiResultDICT:
         if client.user.id not in mscDICT:    # 判斷 User 是否為第一輪對話
             mscDICT[client.user.id] = { 
