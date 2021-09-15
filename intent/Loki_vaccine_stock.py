@@ -44,14 +44,12 @@ def formalize_name(val, userDefinedDICT, resultDICT, resultSTR):
             if count == 0: resultDICT[resultSTR].append(k); count+=1
             if count > 1: print(f"Name Error: Duplicate Names! ({val})")
 
-        count = 0
-
 
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
-    if resultDICT == {}:
-        resultDICT['vaccine_shot'] = []
-        resultDICT['location'] = []
+
+    resultDICT['vaccine_shot'] = []
+    resultDICT['location'] = []
 
     if utterance == "[AZ]在[台北]的[剩餘量]":
         if args[2] in userDefinedDICT['leftover']:

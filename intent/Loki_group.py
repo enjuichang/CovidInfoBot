@@ -39,10 +39,16 @@ def groupnumber(args, resultDICT, resultSTR, resultSTR2): #避免有太多類別
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
     resultDICT["group_num"] = []
-    if utterance == "[第一類][族群]":
+    if utterance == "[第一類]族群":
+        groupnumber(args[0], resultDICT, "group_num", "group_num_def")
+
+    if utterance == "[第一類]對象":
         groupnumber(args[0], resultDICT, "group_num", "group_num_def")
 
     if utterance == "[第一類]接種[對象]":
         groupnumber(args[0], resultDICT, "group_num", "group_num_def")
 
+    if utterance == "[第一類]接種族群":
+        groupnumber(args[0], resultDICT, "group_num", "group_num_def")
+        
     return resultDICT

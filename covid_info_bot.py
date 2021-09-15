@@ -230,7 +230,7 @@ if __name__ == "__main__":
     # print("")
 
     # 輸入其它句子試看看
-    inputLIST = ["az嚴重副作用"]
+    inputLIST = ["台北有幾劑az疫苗"]
     filterLIST = []
     resultDICT = runLoki(inputLIST, filterLIST)
     print(resultDICT)
