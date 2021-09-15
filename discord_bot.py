@@ -6,6 +6,7 @@ import discord
 import json
 import re
 from covid_info_bot import runLoki
+import datetime
 
 import vaccine_stock_api
 from pprint import pprint
@@ -53,8 +54,7 @@ def getLokiResult(inputSTR):
     return resultDICT
 
 
-
-@client.event
+@client.event #成功連線到discord的回答
 async def on_ready():
     logging.info("[READY INFO] {} has connected to Discord!".format(client.user))
     print("[READY INFO] {} has connected to Discord!".format(client.user))
@@ -82,17 +82,24 @@ async def on_message(message):
         await message.reply(replySTR)
         return
 
-    lokiResultDICT = getLokiResult(msgSTR)    # 取得 Loki 回傳結果
+    lokiResultDICT = getLokiResult(msgSTR)   # 取得 Loki 回傳結果
+    
     if lokiResultDICT:
         if client.user.id not in mscDICT:    # 判斷 User 是否為第一輪對話
             mscDICT[client.user.id] = { 
                                         "side_effect": {},
                                         "vaccine_stock": {},
                                         "inquiry_type": {},
+                                        "updatetime" : datetime.now(),
                                         "completed": False}
+        else: #處理時間差
+            datetimeNow = datetime.now()
+            timeDIFF = datetimeNow - mscDICT[client.user.id]["updatetime"]
+            if timeDIFF.total_seconds() <= 30:
+                mscDICT[client.user.id]["updatetime"] = datetimeNow
 
-        for k in lokiResultDICT:    # 將 Loki Intent 的結果，存進 Global mscDICT 變數，可替換成 Database。
-            """
+        for k in lokiResultDICT.keys():    # 將 Loki Intent 的結果，存進 Global mscDICT 變數，可替換成 Database。
+            """ #好像沒有加到.keys()
             lokiResultDICT = {"vaccine_shot"=[AZ, Moderna],"severe_side_effect"=['注射部位','注射部位']}
 
             在 for c in lokiResultDICT迴圈裡面：
@@ -111,11 +118,6 @@ async def on_message(message):
                     mscDICT[client.user.id]["vaccine_stock"][c] = lokiResultDICT[c]
                     mscDICT[client.user.id]["inquiry_type"] = "vaccine_stock"
 
-            # elif k == "confirm":
-            #     if lokiResultDICT["confirm"]:
-            #         replySTR = "好的，謝謝。"
-            #     else:
-            #         replySTR = "請問您的意思是？"
 
         ### inquiry_type 多輪對話的問句 ###
         if mscDICT[client.user.id]["inquiry_type"] == {} and replySTR == "":    
@@ -124,9 +126,7 @@ async def on_message(message):
         ### side_effect 多輪對話的問句 ###
         if mscDICT[client.user.id]["inquiry_type"] == "side_effect" and replySTR == "":   
             if "vaccine_shot" not in mscDICT[client.user.id]["side_effect"]:
-                replySTR = "請問您想知道哪個廠牌的疫苗資訊？"
-            # elif "location" not in mscDICT[client.user.id]["side_effect"]:
-            #     replySTR = "請問您要詢問哪個地區的[{}]疫苗庫存呢？".format(mscDICT[client.user.id]["vaccine_stock"]["vaccine_shot"])          
+                replySTR = "請問您想知道哪個廠牌的疫苗資訊？"          
 
         ### vaccine_stock 多輪對話的問句 ###
         if mscDICT[client.user.id]["inquiry_type"] == "vaccine_stock" and replySTR == "":

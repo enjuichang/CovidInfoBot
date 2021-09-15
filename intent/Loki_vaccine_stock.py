@@ -46,10 +46,6 @@ def formalize_name(val, userDefinedDICT, resultDICT, resultSTR):
 
         count = 0
 
-# def getlocationname(val, locationDICT, resultDICT, resultSTR):
-#     for k in locationDICT.keys():
-#         if val in locationDICT[k]:
-#             resultDICT[resultSTR].append(k)
 
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)

@@ -37,7 +37,7 @@ def formalize_name_side_effect(val, resultDICT, resultSTR, resultSTR2):
                 resultDICT[resultSTR].append(k)
                 side_effect = sideeffectDICT[k]
                 resultDICT[resultSTR2].append(side_effect)
-                resultDICT["inquiry_type"] = "side_effect"
+                resultDICT["inquiry_type"].append("side_effect")
                 count+=1
             if count > 1: 
                 print(f"Name Error: Duplicate Names! ({val})")
@@ -50,11 +50,10 @@ def formalize_name_severe_side_effect(val, resultDICT, resultSTR, resultSTR2):
                 resultDICT[resultSTR].append(k)
                 severe_side_effect= hospitalDICT[k]
                 resultDICT[resultSTR2].append(severe_side_effect)
-                resultDICT["inquiry_type"] = "severe_side_effect"
+                resultDICT["inquiry_type"].append("severe_side_effect")
                 count+=1
             if count > 1: 
                 print(f"Name Error: Duplicate Names! ({val})")
-
 
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
@@ -62,59 +61,60 @@ def getResult(inputSTR, utterance, args, resultDICT):
         resultDICT["vaccine_shot"] = []
         resultDICT["side_effect"] = []
         resultDICT["severe_side_effect"] = []
+        resultDICT["inquiry_type"] = []
 
     if utterance == "[az][嚴重]副作用":
         if args[1] in userDefinedDICT["severe"]:
             formalize_name_severe_side_effect(args[0], resultDICT, "vaccine_shot", "severe_side_effect")
-        else:
+        elif args[1] == []:
             formalize_name_side_effect(args[0], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[az]疫苗[嚴重]副作用":
         if args[1] in userDefinedDICT["severe"]:
             formalize_name_severe_side_effect(args[0], resultDICT, "vaccine_shot", "severe_side_effect")
-        else:
+        elif args[1] == []:
             formalize_name_side_effect(args[0], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[打完][莫德納][後]，[出現]哪些[嚴重]副作用需要送醫":
         if args[4] in userDefinedDICT["severe"]:
             formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        else:
+        elif args[4] == []:
             formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[打完][莫德納]疫苗[後]，[出現]哪些[嚴重]副作用需要送醫":
         if args[4] in userDefinedDICT["severe"]:
             formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        else:
+        elif args[4] == []:
             formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[第一劑][az][嚴重]副作用":
         if args[2] in userDefinedDICT["severe"]:
             formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        else:
+        elif args[2] == []:
             formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[第一劑][az][會][有]哪些[嚴重]副作用":
         if args[4] in userDefinedDICT["severe"]:
             formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        else:
+        elif args[4] == []:
             formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[第一劑][az]疫苗[嚴重]副作用":
         if args[2] in userDefinedDICT["severe"]:
             formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        else:
+        elif args[2] == []:
             formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[第一劑][az]疫苗[會][有]哪些[嚴重]副作用":
         if args[4] in userDefinedDICT["severe"]:
             formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        else:
+        elif args[4] == []:
             formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "請問[az]疫苗[嚴重]副作用為何":
         if args[1] in userDefinedDICT["severe"]:
             formalize_name_severe_side_effect(args[0], resultDICT, "vaccine_shot", "severe_side_effect")
-        else:
+        elif args[1] == []:
             formalize_name_side_effect(args[0], resultDICT, "vaccine_shot", "side_effect")
             
     resultDICT["side_effect_var"] = []
