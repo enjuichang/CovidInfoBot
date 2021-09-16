@@ -90,7 +90,7 @@ async def on_message(message):
                                         "side_effect": {},
                                         "vaccine_stock": {},
                                         "inquiry_type": {},
-                                        "updatetime" : datetime.now(),
+                                        "updatetime" : datetime.datetime.now,
                                         "completed": False}
         else: #處理時間差
             datetimeNow = datetime.now()
