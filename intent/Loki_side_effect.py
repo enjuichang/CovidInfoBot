@@ -57,64 +57,67 @@ def formalize_name_severe_side_effect(val, resultDICT, resultSTR, resultSTR2):
 
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
-    if resultDICT == {}:
-        resultDICT["vaccine_shot"] = []
-        resultDICT["side_effect"] = []
-        resultDICT["severe_side_effect"] = []
-        resultDICT["inquiry_type"] = []
+    for k in ("vaccine_shot", "side_effect", "severe_side_effect", "inquiry_type"):
+        if k in resultDICT.keys():
+            pass
+        else:
+            resultDICT[k] = []
+    # print(resultDICT) #確認resultDICT是否為空資料，
+    # 原本寫法是告訴你當resultdict為空時，才會繼續作業
+    # 新的寫法是當k不在keys中時可以加入新的[]
 
     if utterance == "[az][嚴重]副作用":
-        if args[1] != []:
+        if args[1] != "": # 要使用空字串!
             formalize_name_severe_side_effect(args[0], resultDICT, "vaccine_shot", "severe_side_effect")
-        elif args[1] == []:
+        elif args[1] == "":
             formalize_name_side_effect(args[0], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[az]疫苗[嚴重]副作用":
-        if args[1] != []:
+        if args[1] != "":
             formalize_name_severe_side_effect(args[0], resultDICT, "vaccine_shot", "severe_side_effect")
-        elif args[1] == []:
+        elif args[1] == "":
             formalize_name_side_effect(args[0], resultDICT, "vaccine_shot", "side_effect")
 
-    if utterance == "[打完][莫德納][後]，[出現]哪些[嚴重]副作用需要送醫":
-        if args[4] != []:
-            formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        elif args[4] == []:
-            formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
+    if utterance == "打完[莫德納][後]，[出現]哪些[嚴重]副作用需要送醫":
+        if args[4] != "":
+            formalize_name_severe_side_effect(args[0], resultDICT, "vaccine_shot", "severe_side_effect")
+        elif args[4] == "":
+            formalize_name_side_effect(args[0], resultDICT, "vaccine_shot", "side_effect")
 
-    if utterance == "[打完][莫德納]疫苗[後]，[出現]哪些[嚴重]副作用需要送醫":
-        if args[4] != []:
-            formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        elif args[4] == []:
-            formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
+    if utterance == "打完[莫德納]疫苗[後]，[出現]哪些[嚴重]副作用需要送醫":
+        if args[4] != "":
+            formalize_name_severe_side_effect(args[0], resultDICT, "vaccine_shot", "severe_side_effect")
+        elif args[4] == "":
+            formalize_name_side_effect(args[0], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[第一劑][az][嚴重]副作用":
-        if args[2] != []:
+        if args[2] != "":
             formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        elif args[2] == []:
+        elif args[2] == "":
             formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[第一劑][az][會][有]哪些[嚴重]副作用":
-        if args[4] != []:
+        if args[4] != "":
             formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        elif args[4] == []:
+        elif args[4] == "":
             formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[第一劑][az]疫苗[嚴重]副作用":
-        if args[2] != []:
+        if args[2] != "":
             formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        elif args[2] == []:
+        elif args[2] == "":
             formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "[第一劑][az]疫苗[會][有]哪些[嚴重]副作用":
-        if args[4] != []:
+        if args[4] != "":
             formalize_name_severe_side_effect(args[1], resultDICT, "vaccine_shot", "severe_side_effect")
-        elif args[4] == []:
+        elif args[4] == "":
             formalize_name_side_effect(args[1], resultDICT, "vaccine_shot", "side_effect")
 
     if utterance == "請問[az]疫苗[嚴重]副作用為何":
-        if args[1] != []:
+        if args[1] != "":
             formalize_name_severe_side_effect(args[0], resultDICT, "vaccine_shot", "severe_side_effect")
-        elif args[1] == []:
+        elif args[1] == "":
             formalize_name_side_effect(args[0], resultDICT, "vaccine_shot", "side_effect")
             
     resultDICT["side_effect_var"] = []

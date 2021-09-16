@@ -17,21 +17,35 @@ logging.basicConfig(level=logging.CRITICAL)
 # <取得多輪對話資訊>
 client = discord.Client()
 
-sideEffectTemplate ={
-                "vaccine_shot":"",
-                 "side_effect": "",
-                 "side_effect_var":""
-                 }
-severeSideEffectTemplate = {
-    "vaccine_shot" : "",
-    "severe_side_effect" : ""
-}
+# sideEffectTemplate ={
+#                 "vaccine_shot":"",
+#                  "side_effect": "",
+#                  "side_effect_var":""
+#                  }
+# severeSideEffectTemplate = {
+#     "vaccine_shot" : "",
+#     "severe_side_effect" : ""
+# }
 
-vaccineStockTemplate = {
-                "vaccine_shot":"",
-                "location":"",
-                "vaccine_stock":""
-                }
+# vaccineStockTemplate = {
+#                 "vaccine_shot":"",
+#                 "location":"",
+#                 "vaccine_stock":""
+#                 }
+
+# 將全部意圖合為一個Template處理，
+# 但不一定要每個intent都必須滿足才能結束對話，
+# 而是當confirm = True時，就可以結束對話
+allTemplate = {
+    "inquiry_type" : "",
+    "vaccine_shot" : "",
+    "side_effect": "",
+    "severe_side_effect" : "",
+    "location" : "",
+    "vaccine_stock" : "",
+    "group_num" : "",
+    "group_def" : ""
+}
 
 mscDICT = {
     # "userID": {side_effectTemplate, vaccine_stockTemplate, severeSideEffectTemplate}
@@ -83,13 +97,15 @@ async def on_message(message):
         return
 
     lokiResultDICT = getLokiResult(msgSTR)   # 取得 Loki 回傳結果
+    logging.info(lokiResultDICT)
     
+    #多輪對話
     if lokiResultDICT:
         if client.user.id not in mscDICT:    # 判斷 User 是否為第一輪對話
             mscDICT[client.user.id] = { 
-                                        "side_effect": {},
-                                        "vaccine_stock": {},
-                                        "inquiry_type": {},
+                                        "side_effect": "",
+                                        "vaccine_stock": "",
+                                        "inquiry_type": "",
                                         "updatetime" : datetime.datetime.now,
                                         "completed": False}
         else: #處理時間差
@@ -99,25 +115,32 @@ async def on_message(message):
                 mscDICT[client.user.id]["updatetime"] = datetimeNow
 
         for k in lokiResultDICT.keys():    # 將 Loki Intent 的結果，存進 Global mscDICT 變數，可替換成 Database。
-            """ #好像沒有加到.keys()
+            """ 
             lokiResultDICT = {"vaccine_shot"=[AZ, Moderna],"severe_side_effect"=['注射部位','注射部位']}
 
             在 for c in lokiResultDICT迴圈裡面：
             mscDICT[client.user.id]["side_effect"]["side_effect"] = ['注射部位','注射部位']
             """
-            if k == "inquiry_type":
-                mscDICT[client.user.id]["inquiry_type"] = lokiResultDICT["inquiry_type"]
+            # if k == "inquiry_type":
+            #     mscDICT[client.user.id]["inquiry_type"] = lokiResultDICT["inquiry_type"]
 
-            if k == "side_effect_var":
-                for c in lokiResultDICT:
-                    mscDICT[client.user.id]["side_effect"][c] = lokiResultDICT[c]
-                    mscDICT[client.user.id]["inquiry_type"] = "side_effect"
+            # if k == "side_effect_var":
+            #     for c in lokiResultDICT:
+            #         mscDICT[client.user.id]["side_effect"][c] = lokiResultDICT[c]
+            #         mscDICT[client.user.id]["inquiry_type"] = "side_effect"
 
-            elif k == "vaccine_stock":
-                for c in lokiResultDICT:
-                    mscDICT[client.user.id]["vaccine_stock"][c] = lokiResultDICT[c]
-                    mscDICT[client.user.id]["inquiry_type"] = "vaccine_stock"
+            # elif k == "vaccine_stock":
+            #     for c in lokiResultDICT:
+            #         mscDICT[client.user.id]["vaccine_stock"][c] = lokiResultDICT[c]
+            #         mscDICT[client.user.id]["inquiry_type"] = "vaccine_stock"
 
+            #試改寫成以下方法
+            mscDICT[client.user.id][k] = lokiResultDICT[k]
+            logging.info(mscDICT)
+
+        # bot回覆
+        # 想要讓bot了解何時結束對話
+        if mscDICT[client.user.id]
 
         ### inquiry_type 多輪對話的問句 ###
         if mscDICT[client.user.id]["inquiry_type"] == {} and replySTR == "":    
@@ -136,21 +159,21 @@ async def on_message(message):
                 replySTR = "請問您要詢問哪個地區的{}疫苗庫存呢？"
 
         ### side_effect 確認 ###
-        if set(sideEffectTemplate.keys()).difference(mscDICT[client.user.id]["side_effect"]) == set() and replySTR == "":
-            for i in range(len(mscDICT[client.user.id]["side_effect"]["vaccine_shot"])):
-                if mscDICT[client.user.id]["side_effect"]["side_effect"]:
-                    replySTR += """{}疫苗的常見副作用是{}。\n""".format(mscDICT[client.user.id]["side_effect"]["vaccine_shot"][i],
-                                                                    mscDICT[client.user.id]["side_effect"]["side_effect"][i])
-                if mscDICT[client.user.id]["side_effect"]["severe_side_effect"]:
-                    replySTR += """{}疫苗的常見副作用是{}。\n""".format(mscDICT[client.user.id]["side_effect"]["vaccine_shot"][i],
-                                                                    mscDICT[client.user.id]["side_effect"]["severe_side_effect"][i])
+        # if set(sideEffectTemplate.keys()).difference(mscDICT[client.user.id]["side_effect"]) == set() and replySTR == "":
+        #     for i in range(len(mscDICT[client.user.id]["side_effect"]["vaccine_shot"])):
+        #         if mscDICT[client.user.id]["side_effect"]["side_effect"]:
+        #             replySTR += """{}疫苗的常見副作用是{}。\n""".format(mscDICT[client.user.id]["side_effect"]["vaccine_shot"][i],
+        #                                                             mscDICT[client.user.id]["side_effect"]["side_effect"][i])
+        #         if mscDICT[client.user.id]["side_effect"]["severe_side_effect"]:
+        #             replySTR += """{}疫苗的常見副作用是{}。\n""".format(mscDICT[client.user.id]["side_effect"]["vaccine_shot"][i],
+        #                                                             mscDICT[client.user.id]["side_effect"]["severe_side_effect"][i])
 
-            mscDICT[client.user.id]["completed"] = True
+        #     mscDICT[client.user.id]["completed"] = True
 
-        ### vaccine_stock 確認 ###
-        if set(vaccineStockTemplate.keys()).difference(mscDICT[client.user.id]["vaccine_stock"]) == set() and replySTR == "":
-            replySTR = vaccine_stock_api.write_response(mscDICT[client.user.id]["vaccine_stock"])
-            mscDICT[client.user.id]["completed"] = True
+        # ### vaccine_stock 確認 ###
+        # if set(vaccineStockTemplate.keys()).difference(mscDICT[client.user.id]["vaccine_stock"]) == set() and replySTR == "":
+        #     replySTR = vaccine_stock_api.write_response(mscDICT[client.user.id]["vaccine_stock"])
+        #     mscDICT[client.user.id]["completed"] = True
 
     print("mscDICT =")
     pprint(mscDICT)
