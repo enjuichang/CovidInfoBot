@@ -117,7 +117,6 @@ async def on_message(message):
         for k in lokiResultDICT.keys():    # 將 Loki Intent 的結果，存進 Global mscDICT 變數，可替換成 Database。
             """ 
             lokiResultDICT = {"vaccine_shot"=[AZ, Moderna],"severe_side_effect"=['注射部位','注射部位']}
-
             在 for c in lokiResultDICT迴圈裡面：
             mscDICT[client.user.id]["side_effect"]["side_effect"] = ['注射部位','注射部位']
             """
