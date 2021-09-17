@@ -24,14 +24,15 @@ def debugInfo(inputSTR, utterance):
 
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance) #為了要問是否要結束對話，所以True and False會相反
+    
     if utterance == "不是":
         if len(inputSTR) < 3:
-            resultDICT["completed"] = True
+            resultDICT["completed"]= True
         pass
 
     if utterance == "好":
         if len(inputSTR) < 2:
-            resultDICT["completed"] = False
+            resultDICT["completed"]= False
         pass
 
     if utterance == "是":
