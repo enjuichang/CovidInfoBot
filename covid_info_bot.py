@@ -50,11 +50,13 @@ import json
 try:
     from intent import Loki_vaccine_stock
     from intent import Loki_side_effect
+    from intent import Loki_confirm_check
     from intent import Loki_Probe
     from intent import Loki_group
 except:
     from .intent import Loki_vaccine_stock
     from .intent import Loki_side_effect
+    from .intent import Loki_confirm_check
     from .intent import Loki_Probe
     from .intent import Loki_group
 
@@ -177,22 +179,25 @@ def runLoki(inputLIST, filterLIST=[]):
     if lokiRst.getStatus():
         for index, key in enumerate(inputLIST):
             for resultIndex in range(0, lokiRst.getLokiLen(index)):
-                # 問peter(get_intent)
-                # vaccine_stock
-                if lokiRst.getIntent(index, resultIndex) == "vaccine_stock":
-                    resultDICT = Loki_vaccine_stock.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
-
                 # side_effect
                 if lokiRst.getIntent(index, resultIndex) == "side_effect":
                     resultDICT = Loki_side_effect.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
 
-                # Probe
-                if lokiRst.getIntent(index, resultIndex) == "Probe":
-                    resultDICT = Loki_Probe.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
-
                 # group
                 if lokiRst.getIntent(index, resultIndex) == "group":
                     resultDICT = Loki_group.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
+
+                # confirm_check
+                if lokiRst.getIntent(index, resultIndex) == "confirm_check":
+                    resultDICT = Loki_confirm_check.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
+
+                # vaccine_stock
+                if lokiRst.getIntent(index, resultIndex) == "vaccine_stock":
+                    resultDICT = Loki_vaccine_stock.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
+
+                # Probe
+                if lokiRst.getIntent(index, resultIndex) == "Probe":
+                    resultDICT = Loki_Probe.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
 
     else:
         resultDICT = {"msg": lokiRst.getMessage()}
@@ -219,7 +224,7 @@ if __name__ == "__main__":
 
     # confirm_check
     # print("[TEST] confirm_check")
-    # inputLIST = ['好','是','不對','不是']
+    # inputLIST = ['好','是','有','不對','不是','沒有']
     # testLoki(inputLIST, ['confirm_check'])
     # print("")
 
@@ -237,8 +242,7 @@ if __name__ == "__main__":
 
     # 輸入其它句子試看看
 
-    inputLIST = ["台北有幾劑az疫苗"]
-    inputLIST = ["az副作用"]
+    inputLIST = ["moderna副作用"]
     filterLIST = []
     resultDICT = runLoki(inputLIST, filterLIST)
     print(resultDICT)
