@@ -241,8 +241,7 @@ if __name__ == "__main__":
     # print("")
 
     # 輸入其它句子試看看
-
-    inputLIST = ["moderna副作用"]
+    inputLIST = ["第十類對象"]
     filterLIST = []
     resultDICT = runLoki(inputLIST, filterLIST)
     print(resultDICT)

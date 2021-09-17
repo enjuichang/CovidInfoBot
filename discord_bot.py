@@ -44,7 +44,7 @@ allTemplate = {
     "location" : [],
     "vaccine_stock" : [],
     "group_num" : [],
-    "group_def" : [],
+    "group_num_def" : [],
     "updatetime" : datetime.datetime.now(), #新增datetime
     "completed" : False
 }
@@ -110,7 +110,7 @@ async def on_message(message):
             #         "location" : "",
             #         "vaccine_stock" : "",
             #         "group_num" : "",
-            #         "group_def" : "",
+            #         "group_num_def" : "",
             #         "completed" : False
             #                         }
             mscDICT[client.user.id] = allTemplate
@@ -125,8 +125,8 @@ async def on_message(message):
                 #     "severe_side_effect" : "",
                 #     "location" : "",
                 #     "vaccine_stock" : "",
-                #     "group_num" : "", #未處理
-                #     "group_def" : "", #未處理
+                #     "group_num" : "", 
+                #     "group_num_def" : "", 
                 #     "completed" : False
                 #                     }
                 mscDICT[client.user.id] = allTemplate
@@ -151,6 +151,7 @@ async def on_message(message):
         if mscDICT[client.user.id]["completed"] == True:
             replySTR = "對話結束囉! 謝謝你使用Covid_Info_Bot! 請務必給我們五個星喔XDD"
             pass
+
         else:
             if mscDICT[client.user.id]["inquiry_type"] == "":
                 replySTR = "\n請問要問關於疫苗的甚麼資訊呢？"
@@ -185,9 +186,14 @@ async def on_message(message):
                     replySTR = vaccine_stock_api.write_response(mscDICT[client.user.id]["vaccine_stock"])
                     await message.reply(replySTR)
                     replySTR = "還想問其他的嗎?"
-                    
+                
+                elif "group" in mscDICT[client.user.id]["inquiry_type"] and mscDICT[client.user.id]["group_num"] != "":
+                    replySTR = """{}人員規範圍{}。\n""".format("".join(mscDICT[client.user.id]["group_num"]), "".join(mscDICT[client.user.id]["group_num_def"]))
+                    await message.reply(replySTR)
+                    replySTR = "還想問其他的嗎?"
+
                 else:
-                    print("看到我就是種錯誤囉!")
+                    replySTR = "看到我就是種錯誤囉!"
             
         
     # if lokiResultDICT:            
