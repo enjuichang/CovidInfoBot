@@ -95,41 +95,43 @@ async def on_message(message):
 
     if re.search("(hi|hello|哈囉|嗨|[你您]好)", msgSTR.lower()):
         replySTR = "Hi 您好，想知道哪些疫苗資訊呢?"
-        await message.reply(replySTR)
+        # await message.reply(replySTR)
     
     lokiResultDICT = getLokiResult(msgSTR)   # 取得 Loki 回傳結果
     logging.info(lokiResultDICT)
     
     if lokiResultDICT:
-        if client.user.id not in mscDICT:
-            mscDICT[client.user.id] = {
-                    "inquiry_type" : "",
-                    "vaccine_shot" : "",
-                    "side_effect": "",
-                    "severe_side_effect" : "",
-                    "location" : "",
-                    "vaccine_stock" : "",
-                    "group_num" : "",
-                    "group_def" : "",
-                    "confirm" : False,
-                    "completed" : False
-                                    }
+        if client.user.id not in mscDICT: # 判斷 User 是否為第一輪對話
+            # mscDICT[client.user.id] = {
+            #         "inquiry_type" : "",
+            #         "vaccine_shot" : "",
+            #         "side_effect": "",
+            #         "severe_side_effect" : "",
+            #         "location" : "",
+            #         "vaccine_stock" : "",
+            #         "group_num" : "",
+            #         "group_def" : "",
+            #         "confirm" : False,
+            #         "completed" : False
+            #                         }
+            mscDICT[client.user.id] = allTemplate
         else:
             datetimeNow = datetime.datetime.now()
             timeDIFF = datetimeNow - mscDICT[client.user.id]["updatetime"]
             if timeDIFF.total_seconds() <= 300: # 回答時間超過五分鐘，對話內容重置
-                mscDICT[client.user.id]= {
-                    "inquiry_type" : "",
-                    "vaccine_shot" : "",
-                    "side_effect": "",
-                    "severe_side_effect" : "",
-                    "location" : "",
-                    "vaccine_stock" : "",
-                    "group_num" : "", #未處理
-                    "group_def" : "", #未處理
-                    "confirm" : False,
-                    "completed" : False
-                                    }
+                # mscDICT[client.user.id]= {
+                #     "inquiry_type" : "",
+                #     "vaccine_shot" : "",
+                #     "side_effect": "",
+                #     "severe_side_effect" : "",
+                #     "location" : "",
+                #     "vaccine_stock" : "",
+                #     "group_num" : "", #未處理
+                #     "group_def" : "", #未處理
+                #     "confirm" : False,
+                #     "completed" : False
+                #                     }
+                mscDICT[client.user.id] = allTemplate
         
         # 將第一輪對話 Loki Intent 的結果，
         # 存進 Global mscDICT 變數，可替換成 Database。
@@ -139,6 +141,10 @@ async def on_message(message):
         for k in lokiResultDICT.keys(): #注意!
                 mscDICT[client.user.id][k] = lokiResultDICT[k]
     
+        print("8888888888888888888888")
+        print("mscDICT[client.user.id]:",mscDICT[client.user.id]) #測試用
+        print("8888888888888888888888")
+
     # if confirm == False : 確認不完整資訊
     # elif confirm == True : 問還要不要繼續問資訊
     if lokiResultDICT:
@@ -148,8 +154,14 @@ async def on_message(message):
             if mscDICT[client.user.id]["inquiry_type"] == "":
                 replySTR = "\n請問要問關於疫苗的甚麼資訊呢？"
             
+            elif mscDICT[client.user.id]["inquiry_type"] == "" and mscDICT[client.user.id]["vaccine_shot"] != "":
+                replySTR = "你想知道關於這支疫苗的甚麼事情?"
+            
             elif mscDICT[client.user.id]["inquiry_type"] == "side_effect" and mscDICT[client.user.id]["vaccine_shot"] == "":
                 replySTR = "你想要詢問哪隻疫苗的副作用?"
+            
+            elif mscDICT[client.user.id]["inquiry_type"] == "severe_side_effect" and mscDICT[client.user.id]["vaccine_shot"] == "":
+                replySTR = "你想要詢問哪隻疫苗的嚴重副作用?"
             
             elif mscDICT[client.user.id]["inquiry_type"] == "vaccine_stock" and mscDICT[client.user.id]["location"] == "":
                 replySTR = "請問您要詢問哪個地區的疫苗庫存呢?"
@@ -157,26 +169,32 @@ async def on_message(message):
             elif mscDICT[client.user.id]["inquiry_type"] == "vaccine_stock" and mscDICT[client.user.id]["vaccine_shot"] == "":
                 replySTR = "請問您想知道哪個廠牌的疫苗庫存呢?"
             else:
-                replySTR = "你要再打清楚你要甚麼資訊喔!"
+                replySTR = "你到底想要甚麼哩?"
         
-        else:
-            if mscDICT[client.user.id]["inquiry_type"] == "side_effect" and mscDICT[client.user.id]["vaccine_shot"] != "":
+        elif mscDICT[client.user.id]["confirm"] == True: #當confirm == True時，會進入以下確認事項
+            if "side_effect" in mscDICT[client.user.id]["inquiry_type"] and mscDICT[client.user.id]["vaccine_shot"] != "":
                 replySTR += """{}疫苗的常見副作用是{}。\n""".format(mscDICT[client.user.id]["vaccine_shot"], mscDICT[client.user.id]["side_effect"])
-                await message.reply("還想問其他的嗎?")
+                await message.reply(replySTR)
+                replySTR = "還想問其他的嗎?" 
 
-            elif mscDICT[client.user.id]["inquiry_type"] == "severe_side_effect" and mscDICT[client.user.id]["vaccine_shot"] != "":
+            elif "severe_side_effect" in mscDICT[client.user.id]["inquiry_type"] and mscDICT[client.user.id]["vaccine_shot"] != "":
                 replySTR += """{}疫苗的常見副作用是{}。\n""".format(mscDICT[client.user.id]["vaccine_shot"], mscDICT[client.user.id]["severe_side_effect"])
-                await message.reply("還想問其他的嗎?")
+                await message.reply(replySTR)
+                replySTR = "還想問其他的嗎?"
 
-            elif mscDICT[client.user.id]["inquiry_type"] == "vaccine_stock" and mscDICT[client.user.id]["location"] != "" and mscDICT[client.user.id]["vaccine_shot"] != "":
+            elif "vaccine_stock" in mscDICT[client.user.id]["inquiry_type"] and mscDICT[client.user.id]["location"] != "" and mscDICT[client.user.id]["vaccine_shot"] != "":
                 replySTR = vaccine_stock_api.write_response(mscDICT[client.user.id]["vaccine_stock"])
-                await message.reply("還想問其他的嗎?")
+                await message.reply(replySTR)
+                replySTR = "還想問其他的嗎?"
             
-            elif mscDICT[client.user.id]["completed"] == True:
-                replySTR = "對話結束囉! 謝謝你使用Covid_Info_Bot! 請務必給我們五個星喔XD"
+        elif mscDICT[client.user.id]["confirm"] == True and mscDICT[client.user.id]["completed"] == True:
+            replySTR = "對話結束囉! 謝謝你使用Covid_Info_Bot! 請務必給我們五個星喔!"
             
-            else:
-                print("出現錯誤囉!")
+        else:
+            print("看到我就是種錯誤囉!")
+        
+    # if lokiResultDICT:
+
             
 
 
@@ -254,8 +272,8 @@ async def on_message(message):
     return
 
 # except Exception as e:
-    logging.error("[MSG ERROR] {}".format(str(e)))
-    print("[MSG ERROR] {}".format(str(e)))
+    # logging.error("[MSG ERROR] {}".format(str(e)))
+    # print("[MSG ERROR] {}".format(str(e)))
 
 
 if __name__ == "__main__":
