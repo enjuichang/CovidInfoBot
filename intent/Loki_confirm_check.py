@@ -25,15 +25,18 @@ def debugInfo(inputSTR, utterance):
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
     if utterance == "不是":
-        # write your code here
+        if len(inputSTR) < 3:
+            resultDICT["completed"] = False
         pass
 
     if utterance == "好":
-        # write your code here
+        if len(inputSTR) < 2:
+            resultDICT["completed"] = True
         pass
 
     if utterance == "是":
-        # write your code here
+        if len(inputSTR) < 2:
+            resultDICT["completed"] = True
         pass
 
     return resultDICT
