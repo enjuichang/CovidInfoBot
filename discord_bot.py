@@ -93,7 +93,6 @@ async def on_message(message):
     replySTR = ""    # Bot 回應訊息
 
     if re.search("(hi|hello|哈囉|嗨|[你您]好)", msgSTR.lower()):
-<<<<<<< HEAD
         replySTR = "Hi 您好，想知道哪些疫苗資訊呢?"
         await message.reply(replySTR)
         return
@@ -101,17 +100,6 @@ async def on_message(message):
     lokiResultDICT = getLokiResult(msgSTR)    # 取得 Loki 回傳結果
     logging.info(lokiResultDICT)  
 
-=======
-        replySTR = "Hi 您好，想知道哪隻疫苗資訊呢?"
-        # await message.reply(replySTR)
-    elif client.user.id not in mscDICT:
-        replySTR = "歡迎來到疫苗bot!\n請問您想知道哪隻疫苗資訊呢?"
-        mscDICT[client.user.id] = allTemplate
-    
-    lokiResultDICT = getLokiResult(msgSTR)   # 取得 Loki 回傳結果
-    logging.info(lokiResultDICT)
-    
->>>>>>> develop
     if lokiResultDICT:
         if client.user.id not in mscDICT: # 判斷 User 是否為第一輪對話
             # mscDICT[client.user.id] = {
