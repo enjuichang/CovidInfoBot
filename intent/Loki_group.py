@@ -29,6 +29,7 @@ def groupnumber(args, resultDICT, resultSTR, resultSTR2): #避免有太多類別
         if count == 0:
             resultDICT[resultSTR].append(args)
             group_num_def = groupDICT[args]
+            print(group_num_def)
             resultDICT[resultSTR2].append(group_num_def)
             count += 1
         if count > 0:
@@ -38,29 +39,29 @@ def groupnumber(args, resultDICT, resultSTR, resultSTR2): #避免有太多類別
 
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
-    resultDICT["group_num"] = []
+
+    for k in ("group_num", "group_num_def", "inquiry_type"):
+        if k in resultDICT.keys():
+            pass
+        else:
+            resultDICT[k] = []
+
     if utterance == "[第一類]族群":
         groupnumber(args[0], resultDICT, "group_num", "group_num_def")
-        pass
 
     if utterance == "[第一類]對象":
         groupnumber(args[0], resultDICT, "group_num", "group_num_def")
-        pass
 
     if utterance == "[第一類]接種對象":
         groupnumber(args[0], resultDICT, "group_num", "group_num_def")
-        pass
 
     if utterance == "[第一類]接種族群":
         groupnumber(args[0], resultDICT, "group_num", "group_num_def")
-        pass
 
     if utterance == "[第一類]族群":
         groupnumber(args[0], resultDICT, "group_num", "group_num_def")
-        pass
 
     if utterance == "[第一類]接種族群":
         groupnumber(args[0], resultDICT, "group_num", "group_num_def")
-        pass
     
     return resultDICT
