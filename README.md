@@ -29,7 +29,7 @@
 ```sh
 pip clone https://github.com/enjuichang/CovidInfoBot
 ```
-4. 在`Covid_Info_Bot`的[github](https://github.com/enjuichang/CovidInfoBot)上pull我們的`ref`檔
+4. 在`Covid_Info_Bot`的[Github](https://github.com/enjuichang/CovidInfoBot)上pull我們的`ref`檔
 5. 進入專案後，下方選擇`ArticutModel`並依序點擊 `[瀏覽]` <br/>> 選擇`ref/Exchange.ref` > `[讀取意圖]` ，並進入意圖。
 6. 讀取後，在每個intent內按下`[生成模型]`。
 7. 完成後，在畫面最上面點擊左邊的「房子」圖示，<br/>回到專案頁。這裡有`Covid_Info_Bot`的專案金鑰。
@@ -78,14 +78,14 @@ pip clone https://github.com/enjuichang/CovidInfoBot
   ```
 ----
 ## Getting Started
-1. Log into [Loki](https://api.droidtown.co/loki/)
-2. Create a `Covid_Info_Bot` project
-3. Clone this repository on Github
+1. Log into [Loki](https://api.droidtown.co/loki/).
+2. Create a `Covid_Info_Bot` project.
+3. Clone this repository on Github.
 ```sh
 pip clone https://github.com/enjuichang/CovidInfoBot
 ```
-4. Pull `.ref` files from `Covid_Info_Bot` on [github](https://github.com/enjuichang/CovidInfoBot)
-5. After entering the project page, select the `ArticutModel` and click on `[瀏覽]` <br/>> choose `ref/Exchange.ref` > `[讀取意圖]` in order to enter the intent。
+4. Pull `.ref` files from `Covid_Info_Bot` on [Github](https://github.com/enjuichang/CovidInfoBot).
+5. After entering the project page, select the `ArticutModel` and click on `[瀏覽]` <br/>> choose `ref/Exchange.ref` > `[讀取意圖]` in order to enter the intent.
 6. After reading, every click `[生成模型]` in every intent.
 7. When finished, click the "house" button on the upper left side of your screen<br/>Back to the Project page. There has the `Covid_Info_bot` project key.
 8. Edit `Covid_Info_Bot.py`:
