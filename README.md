@@ -55,7 +55,7 @@
 ----
 ## 作者
 - 張恩睿Enjui Eric Chang [@enjuichang](https://github.com/enjuichang)
-- [@ShishanLiu](https://github.com/ShiShanLiu)
+- Shi Shan Liu [@ShishanLiu](https://github.com/ShiShanLiu)
 
 ## English Version
 
