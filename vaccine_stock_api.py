@@ -56,8 +56,10 @@ def write_response(inputDICT):
     }
     outputDICT = {}
     #try:
-    if set(vaccineStockTemplate.keys()).difference(inputDICT.keys()) == set():
+    if inputDICT["vaccine_shot"] != [] and inputDICT["location"] != []:
         for i in range(len(inputDICT["vaccine_shot"])):
+            if inputDICT["vaccine_shot"][i] == "all":
+                outputSTR += "目前還沒有統計全部疫苗的功能"
             outputDICT["date"] = dt.datetime.strptime(set(vaccine_stockDF['date'].values).pop(),"%Y-%m-%d")
             outputDICT["vaccine_shot"] = inputDICT["vaccine_shot"][i] 
             outputDICT["location"] = inputDICT['location'][i]
@@ -72,7 +74,7 @@ def write_response(inputDICT):
     return outputSTR
 
 if __name__ == "__main__":
-    inputLIST = ["我要查詢AZ在台北的剩餘量","我要查詢AZ在台中的剩餘量"]
+    inputLIST = ["請問Moderna在台北的庫存？","我要查詢AZ在台中的剩餘量"]
     filterLIST=[]
     loki_result = covid_info_bot.runLoki(inputLIST, filterLIST)
     response = write_response(loki_result)
