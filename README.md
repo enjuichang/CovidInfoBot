@@ -18,7 +18,7 @@
 ## 安裝套件
 - [ArticutAPI](https://pypi.org/project/ArticutAPI/)
 - Python
-  ```python
+  ```sh
   pip insatll ArticutAPI
   ```
 ----
@@ -73,7 +73,7 @@
 ## Download Packages
 - [ArticutAPI](https://pypi.org/project/ArticutAPI/)
 - Python
-  ```python
+  ```sh
   pip insatll ArticutAPI
   ```
 ----
