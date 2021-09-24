@@ -73,8 +73,8 @@
 ```
 ---
 ## 作者
-- 張恩睿Enjui Eric Chang [@enjuichang](https://github.com/enjuichang)
-- Shi Shan Liu [@ShishanLiu](https://github.com/ShiShanLiu)
+- [張恩睿Enjui Eric Chang](https://github.com/enjuichang)
+- [Shi Shan Liu](https://github.com/ShiShanLiu)
 
 ## English Version
 
@@ -146,7 +146,7 @@
 ```
 ---
 ## Authors
-- Enjui Eric Chang [@enjuichang](https://github.com/enjuichang)
-- Shi Shan Liu [@ShishanLiu](https://github.com/ShiShanLiu)
+- [Enjui Eric Chang](https://github.com/enjuichang)
+- [Shi Shan Liu](https://github.com/ShiShanLiu)
 
 
