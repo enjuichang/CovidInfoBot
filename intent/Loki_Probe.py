@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
+import random 
 """
     Loki module for Probe
 
@@ -22,16 +23,31 @@ def debugInfo(inputSTR, utterance):
     if DEBUG_Probe:
         print("[Probe] {} ===> {}".format(inputSTR, utterance))
 
+def random_prompt(txtLIST):
+    return random.choice(txtLIST)
+
 def getResult(inputSTR, utterance, args, resultDICT):
     debugInfo(inputSTR, utterance)
-    # resultDICT["inquiry_type"] = []
+    resultDICT["followup"] = []
 
     if utterance == "[我]想要知道[最新]疫苗資訊":
-        resultDICT["msg"] = "想知道關於疫苗的哪些資訊呢? 如: 疫苗剩餘量、疫苗庫存量、疫苗副作用...等資訊"
-    pass
+        txtLIST = ["請問台北AZ疫苗剩餘量","莫德納疫苗副作用","全臺莫德納庫存"]
+        prompt = random_prompt(txtLIST)
+        resultDICT["response"] = f"想知道關於疫苗的哪些資訊呢? \n如: {prompt}"
 
     if utterance == "[我]想要知道疫苗[資訊]":
-        resultDICT["msg"] = "想知道哪些最新疫苗資訊呢?"
-    pass
+        txtLIST = ["請問台北AZ疫苗剩餘量","莫德納疫苗副作用","全臺莫德納庫存"]
+        prompt = random_prompt(txtLIST)
+        resultDICT["response"] = f"想知道哪些最新疫苗資訊呢? \n如: {prompt}"
     
+    if utterance == "[台中]":
+        resultDICT['followup'].append(args[0])
+
+    if utterance == "[台中][AZ]":
+        resultDICT['followup'].append(args[0]+args[1])
     return resultDICT 
+
+# if __name__ == "__main__":
+#     print(random_prompt(txtLIST))
+
+# #疫苗剩餘量、疫苗庫存量、疫苗副作用...等資訊"

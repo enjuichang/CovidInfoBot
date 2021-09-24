@@ -67,7 +67,6 @@ def getResult(inputSTR, utterance, args, resultDICT):
     # print(resultDICT) #確認resultDICT是否為空資料，
     # 原本寫法是告訴你當resultdict為空時，才會繼續作業
     # 新的寫法是當k不在keys中時可以加入新的[]
-
     if utterance == "[az][嚴重]副作用":
         if args[1] != "": # 要使用空字串!
             formalize_name_severe_side_effect(args[0], resultDICT, "vaccine_shot", "severe_side_effect")
@@ -121,6 +120,5 @@ def getResult(inputSTR, utterance, args, resultDICT):
             formalize_name_severe_side_effect(args[0], resultDICT, "vaccine_shot", "severe_side_effect")
         elif args[1] == "":
             formalize_name_side_effect(args[0], resultDICT, "vaccine_shot", "side_effect")
-    
-    # resultDICT["side_effect_var"] = []
+    print(resultDICT)
     return resultDICT

@@ -232,7 +232,7 @@ if __name__ == "__main__":
     # print("[TEST] vaccine_stock")
     # inputLIST = ['台北有多少疫苗','台北有幾劑疫苗','AZ在台北的剩餘量','全台AZ疫苗剩餘數','台北有多少az疫苗','台北有幾劑az疫苗','全臺疫苗剩餘分佈','台中剩下多少疫苗','台北疫苗剩下多少','台北疫苗還有幾劑','台北還有幾劑疫苗','AZ疫苗在台北的庫存','台中剩下多少AZ疫苗','台北還有幾劑AZ疫苗','台中剩下多少劑疫苗','台中剩下多少劑AZ疫苗','台北AZ疫苗還有多少劑']
     # testLoki(inputLIST, ['vaccine_stock'])
-    # print("")
+    # print("")v
 
     # Probe
     # print("[TEST] Probe")
@@ -241,7 +241,8 @@ if __name__ == "__main__":
     # print("")
 
     # 輸入其它句子試看看
-    inputLIST = ["第十類對象"]
+
+    inputLIST = ["第一類族群"]
     filterLIST = []
     resultDICT = runLoki(inputLIST, filterLIST)
     print(resultDICT)
