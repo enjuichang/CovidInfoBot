@@ -99,7 +99,7 @@
 9. You're good to go
 
 ----
-## 使用者輸入範例
+## Input Example
 - Search for the **side effect of XX vaccine**:
     - 我想知道AZ疫苗副作用
 - Search for the **number of XX vaccine in location OO**:
