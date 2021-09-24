@@ -10,7 +10,7 @@
 
 ![markdown](https://camo.githubusercontent.com/43cf42b70b8ee596c020683174f344c38d49aef480087a1dc4e05109dc1641f9/68747470733a2f2f692e696d6775722e636f6d2f5458647342657a2e706e67 "Sign up")
 
-<!--- 改變markdown城html
+<!--- 改變markdown成html
 
 <img src='https://camo.githubusercontent.com/43cf42b70b8ee596c020683174f344c38d49aef480087a1dc4e05109dc1641f9/68747470733a2f2f692e696d6775722e636f6d2f5458647342657a2e706e67 "Sign up"' width = 100px>
 --->
@@ -26,7 +26,6 @@
   ```sh
   pip insatll ArticutAPI
   ```
-----
 ## 快速上手
 1. 登入[Loki](https://api.droidtown.co/loki/)
 2. 建立`Covid_Info_Bot`專案
@@ -43,7 +42,6 @@
    - LOKI_KEY: 填入你產生的`Covid_Info_Bot`專案金鑰
 9. 開始使用
 
-----
 ## 使用者輸入範例
 - 查詢 **XX疫苗副作用**:
     - 我想知道AZ疫苗副作用
@@ -52,10 +50,31 @@
 - 查詢**XX類族群**:
     - 我想知道第一類族群
 
-----
+## 檔案說明
+```
+│
+├── README.md             <- 最高層的README
+│
+├── intent
+│   ├── intents           <- 透過Loki處理utterance至intent的Python檔
+│   └── Updater.py        <- 更新Loki intents (請詳閱Loki說明).
+│   
+├── json                  <- 資料儲存
+│
+├── ref                   <- 儲存最新版本Loki intents的.ref檔
+│
+├── covid_info_bot.py     <- 最主要使用Loki處理語句的Python檔
+│
+├── discord_bot.py        <- 回傳、處理資料並連接至Discord的Python檔
+│
+├── vaccine_stock_api.py  <- 連接至covid-19.nchc.org.tw資料庫並回傳結果的Python檔
+│
+└── requirements.txt      <- 使用環境說明
+```
+---
 ## 作者
-- 張恩睿Enjui Eric Chang [@enjuichang](https://github.com/enjuichang)
-- [@ShishanLiu](https://github.com/ShiShanLiu)
+- [張恩睿Enjui Eric Chang](https://github.com/enjuichang)
+- [Shi Shan Liu](https://github.com/ShiShanLiu)
 
 ## English Version
 
@@ -74,14 +93,12 @@
 
 ![markdown](https://camo.githubusercontent.com/c39301f6e30c412ac839534ffa4a8bfa02bcad9e3783e17878a6be1d1388383a/68747470733a2f2f692e696d6775722e636f6d2f4c496152544a522e706e67 "log in")
 
-----
 ## Download Packages
 - [ArticutAPI](https://pypi.org/project/ArticutAPI/)
 - Python
   ```sh
   pip insatll ArticutAPI
   ```
-----
 ## Getting Started
 1. Log into [Loki](https://api.droidtown.co/loki/).
 2. Create a `Covid_Info_Bot` project.
@@ -98,8 +115,7 @@
    - LOKI_KEY: Enter your `Covid_Info_Bot` project key
 9. You're good to go
 
-----
-## 使用者輸入範例
+## Input Example
 - Search for the **side effect of XX vaccine**:
     - 我想知道AZ疫苗副作用
 - Search for the **number of XX vaccine in location OO**:
@@ -107,9 +123,30 @@
 - Search for information of **XX group**:
     - 我想知道第一類族群
 
-----
+## 檔案說明
+```
+│
+├── README.md             <- The top-level README for developers using this project.
+│
+├── intent
+│   ├── intents           <- Python files that process utterance to intent via Loki.
+│   └── Updater.py        <- Update Loki intents (Please check Loki documentation).
+│   
+├── json                  <- Storage of data.
+│
+├── ref                   <- .ref files that stores the version of Loki intents.
+│
+├── covid_info_bot.py     <- Main python file that process and connect to Loki.
+│
+├── discord_bot.py        <- Python file that returns result, process and connect to Discord.
+│
+├── vaccine_stock_api.py  <- Python file that connects to covid-19.nchc.org.tw database and results.
+│
+└── requirements.txt      <- The requirements file for reproducing the analysis environment.
+```
+---
 ## Authors
-- Enjui Eric Chang [@enjuichang](https://github.com/enjuichang)
-- [@ShishanLiu](https://github.com/ShiShanLiu)
+- [Enjui Eric Chang](https://github.com/enjuichang)
+- [Shi Shan Liu](https://github.com/ShiShanLiu)
 
 
