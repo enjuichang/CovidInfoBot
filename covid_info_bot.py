@@ -179,6 +179,9 @@ def runLoki(inputLIST, filterLIST=[]):
     if lokiRst.getStatus():
         for index, key in enumerate(inputLIST):
             for resultIndex in range(0, lokiRst.getLokiLen(index)):
+                # vaccine_stock
+                if lokiRst.getIntent(index, resultIndex) == "vaccine_stock":
+                    resultDICT = Loki_vaccine_stock.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
                 # side_effect
                 if lokiRst.getIntent(index, resultIndex) == "side_effect":
                     resultDICT = Loki_side_effect.getResult(key, lokiRst.getUtterance(index, resultIndex), lokiRst.getArgs(index, resultIndex), resultDICT)
