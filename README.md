@@ -8,16 +8,11 @@
 
 1. 註冊卓騰語言科技帳號
 
-![markdown](https://camo.githubusercontent.com/43cf42b70b8ee596c020683174f344c38d49aef480087a1dc4e05109dc1641f9/68747470733a2f2f692e696d6775722e636f6d2f5458647342657a2e706e67 "Sign up")
-
-<!--- 改變markdown成html
-
-<img src='https://raw.githubusercontent.com/ShiShanLiu/CovidInfoBot/multi_round/images/%E7%99%BB%E5%85%A5.png "Sign up"' width = 100px>
---->
+<img src="https://raw.githubusercontent.com/ShiShanLiu/CovidInfoBot/multi_round/images/%E7%99%BB%E5%85%A5.png" width = 600px>
 
 2. 登入Loki
 
-<img src='https://raw.githubusercontent.com/ShiShanLiu/CovidInfoBot/multi_round/images/%E8%A8%BB%E5%86%8A.png "log in"' width = 100px>
+<img src="https://raw.githubusercontent.com/ShiShanLiu/CovidInfoBot/multi_round/images/%E8%A8%BB%E5%86%8A.png" width = 600px>
 
 ----
 ## 安裝套件
