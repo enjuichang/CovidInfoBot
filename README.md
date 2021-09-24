@@ -55,7 +55,7 @@ pip clone https://github.com/enjuichang/CovidInfoBot
 ## English Version
 
 ### Have you ever thought that "clicking" is not the way you speak with a "chat" bot?
-### If you felt that way, then it's time for you to use our Covid_Info_Bot了!
+### If you felt that way, then it's time for you to use our Covid_Info_Bot!
 ### We let you know the latest news on the COVID-19 information here in Taiwan :)
 ----
 
