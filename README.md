@@ -26,9 +26,9 @@
 1. 登入[Loki](https://api.droidtown.co/loki/)
 2. 建立`Covid_Info_Bot`專案
 3. 在Github上clone此專案
-```sh
-pip clone https://github.com/enjuichang/CovidInfoBot
-```
+    ```sh
+    pip clone https://github.com/enjuichang/CovidInfoBot
+    ```
 4. 在`Covid_Info_Bot`的[Github](https://github.com/enjuichang/CovidInfoBot)上pull我們的`ref`檔
 5. 進入專案後，下方選擇`ArticutModel`並依序點擊 `[瀏覽]` <br/>> 選擇`ref/Exchange.ref` > `[讀取意圖]` ，並進入意圖。
 6. 讀取後，在每個intent內按下`[生成模型]`。
@@ -81,9 +81,9 @@ pip clone https://github.com/enjuichang/CovidInfoBot
 1. Log into [Loki](https://api.droidtown.co/loki/).
 2. Create a `Covid_Info_Bot` project.
 3. Clone this repository on Github.
-```sh
-pip clone https://github.com/enjuichang/CovidInfoBot
-```
+    ```sh
+    pip clone https://github.com/enjuichang/CovidInfoBot
+    ```
 4. Pull `.ref` files from `Covid_Info_Bot` on [Github](https://github.com/enjuichang/CovidInfoBot).
 5. After entering the project page, select the `ArticutModel` and click on `[瀏覽]` <br/>> choose `ref/Exchange.ref` > `[讀取意圖]` in order to enter the intent.
 6. After reading, every click `[生成模型]` in every intent.
