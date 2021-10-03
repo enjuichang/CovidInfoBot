@@ -57,103 +57,124 @@ def getResult(inputSTR, utterance, args, resultDICT):
             resultDICT[k] = []
 
     if utterance == "[AZ]在[台北]的[剩餘量]":
-        resultDICT["inquiry_type"].append("vaccine_stock")
-
         if args[2] in userDefinedDICT['leftover']:
+            resultDICT["inquiry_type"].append("vaccine_stock")
+
             if args[0] in vaccineDICT: formalize_name(args[0], userDefinedDICT, resultDICT, 'vaccine_shot')
             if args[1] in allLocationLIST: formalize_name(args[1], locationDICT, resultDICT, 'location')
 
     if utterance == "[AZ]疫苗在[台北]的[庫存]":
-        resultDICT["inquiry_type"].append("vaccine_stock")
-
         if args[2] in userDefinedDICT['leftover']:
+            resultDICT["inquiry_type"].append("vaccine_stock")
+
             if args[0] in vaccineDICT: formalize_name(args[0], userDefinedDICT, resultDICT, 'vaccine_shot')
             if args[1] in allLocationLIST: formalize_name(args[1], locationDICT, resultDICT, 'location')
 
     if utterance == "[全台][AZ]疫苗[剩餘數]":
-        resultDICT["inquiry_type"].append("vaccine_stock")
-
         if args[2] in userDefinedDICT['leftover']:
+            resultDICT["inquiry_type"].append("vaccine_stock")
+
             if args[1] in vaccineDICT: formalize_name(args[1], userDefinedDICT, resultDICT, 'vaccine_shot')
             if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[全臺]疫苗[剩餘分佈]":
-        resultDICT["inquiry_type"].append("vaccine_stock")
 
         if args[1] in userDefinedDICT['leftover']:
+            resultDICT["inquiry_type"].append("vaccine_stock")
+
             # resultDICT['vaccine_shot'].append('all')
             if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台中]剩下多少[AZ]疫苗":
-        resultDICT["inquiry_type"].append("vaccine_stock")
 
-        if args[1] in vaccineDICT: formalize_name(args[1], userDefinedDICT, resultDICT, 'vaccine_shot')
+        if args[1] in vaccineDICT: 
+            resultDICT["inquiry_type"].append("vaccine_stock")
+            formalize_name(args[1], userDefinedDICT, resultDICT, 'vaccine_shot')
         if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台中]剩下多少[劑][AZ]疫苗":
-        resultDICT["inquiry_type"].append("vaccine_stock")
 
-        if args[2] in vaccineDICT: formalize_name(args[2], userDefinedDICT, resultDICT, 'vaccine_shot')
+        if args[2] in vaccineDICT: 
+            resultDICT["inquiry_type"].append("vaccine_stock")
+
+            formalize_name(args[2], userDefinedDICT, resultDICT, 'vaccine_shot')
         if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台中]剩下多少[劑]疫苗":
-        resultDICT["inquiry_type"].append("vaccine_stock")
 
         # resultDICT['vaccine_shot'].append('all')
-        if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
+        if args[0] in allLocationLIST: 
+            resultDICT["inquiry_type"].append("vaccine_stock")
+
+            formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台中]剩下多少疫苗":
-        resultDICT["inquiry_type"].append("vaccine_stock")
-
         # resultDICT['vaccine_shot'].append('all')
-        if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
+        if args[0] in allLocationLIST: 
+            resultDICT["inquiry_type"].append("vaccine_stock")
+            formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台北][AZ]疫苗還有多少[劑]":
         resultDICT["inquiry_type"].append("vaccine_stock")
 
-        if args[1] in vaccineDICT: formalize_name(args[1], userDefinedDICT, resultDICT, 'vaccine_shot')
+        if args[1] in vaccineDICT:         
+            resultDICT["inquiry_type"].append("vaccine_stock")
+
+            formalize_name(args[1], userDefinedDICT, resultDICT, 'vaccine_shot')
         if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台北]還有幾[劑][AZ]疫苗":
-        resultDICT["inquiry_type"].append("vaccine_stock")
 
-        if args[1] in vaccineDICT: formalize_name(args[1], userDefinedDICT, resultDICT, 'vaccine_shot')
+        if args[1] in vaccineDICT: 
+            resultDICT["inquiry_type"].append("vaccine_stock")
+            formalize_name(args[1], userDefinedDICT, resultDICT, 'vaccine_shot')
         if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台北]有幾[劑]疫苗":
-        resultDICT["inquiry_type"].append("vaccine_stock")
 
         # resultDICT['vaccine_shot'].append('all')
-        if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
+        if args[0] in allLocationLIST: 
+            resultDICT["inquiry_type"].append("vaccine_stock")
+
+            formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台北]有多少[az]疫苗":
         resultDICT["inquiry_type"].append("vaccine_stock")
 
-        if args[1] in vaccineDICT: formalize_name(args[1], userDefinedDICT, resultDICT, 'vaccine_shot')
+        if args[1] in vaccineDICT: 
+            resultDICT["inquiry_type"].append("vaccine_stock")
+            
+            formalize_name(args[1], userDefinedDICT, resultDICT, 'vaccine_shot')
         if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台北]有多少疫苗":
-        resultDICT["inquiry_type"].append("vaccine_stock")
 
         # resultDICT['vaccine_shot'].append('all')
-        if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
+        if args[0] in allLocationLIST: 
+            resultDICT["inquiry_type"].append("vaccine_stock")
+
+            formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台北]疫苗剩下多少":
-        resultDICT["inquiry_type"].append("vaccine_stock")
 
         # resultDICT['vaccine_shot'].append('all')
-        if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
+        if args[0] in allLocationLIST: 
+            resultDICT["inquiry_type"].append("vaccine_stock")
+            formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台北]疫苗還有幾[劑]":
-        resultDICT["inquiry_type"].append("vaccine_stock")
-
         # resultDICT['vaccine_shot'].append('all')
-        if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
+        if args[0] in allLocationLIST: 
+            
+            resultDICT["inquiry_type"].append("vaccine_stock")
+            formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台北]還有幾[劑][AZ]疫苗":
         resultDICT["inquiry_type"].append("vaccine_stock")
 
-        if args[2] in vaccineDICT: formalize_name(args[2], userDefinedDICT, resultDICT, 'vaccine_shot')
+        if args[2] in vaccineDICT: 
+            resultDICT["inquiry_type"].append("vaccine_stock")
+            formalize_name(args[2], userDefinedDICT, resultDICT, 'vaccine_shot')
         if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台北]還有幾[劑]疫苗":
@@ -163,9 +184,10 @@ def getResult(inputSTR, utterance, args, resultDICT):
         if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
 
     if utterance == "[台北]有幾[劑][az]疫苗":
-        resultDICT["inquiry_type"].append("vaccine_stock")
 
-        if args[2] in vaccineDICT: formalize_name(args[2], userDefinedDICT, resultDICT, 'vaccine_shot')
+        if args[2] in vaccineDICT: 
+            resultDICT["inquiry_type"].append("vaccine_stock")
+            formalize_name(args[2], userDefinedDICT, resultDICT, 'vaccine_shot')
         if args[0] in allLocationLIST: formalize_name(args[0], locationDICT, resultDICT, 'location')
                  
     return resultDICT
