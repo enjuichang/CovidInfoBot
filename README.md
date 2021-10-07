@@ -45,6 +45,16 @@
 - 查詢**XX類族群**:
     - 我想知道第一類族群
 
+## 環境:
+- Python 3.7+
+
+APIs:
+- COVID-19 Dashboard 全球疫情地圖: covid-19.nchc.org.tw
+
+Packages Installed 需下載套件:
+- ArticutAPI
+- discord
+
 ## 檔案說明
 ```
 │
@@ -118,7 +128,17 @@
 - Search for information of **XX group**:
     - 我想知道第一類族群
 
-## 檔案說明
+## Environment:
+- Python 3.7+
+
+APIs:
+- COVID-19 Dashboard 全球疫情地圖: covid-19.nchc.org.tw
+
+Packages Installed:
+- ArticutAPI
+- discord
+
+## Repo Structure
 ```
 │
 ├── README.md             <- The top-level README for developers using this project.
@@ -143,5 +163,4 @@
 ## Authors
 - [Enjui Eric Chang](https://github.com/enjuichang)
 - [Shi Shan Liu](https://github.com/ShiShanLiu)
-
 
