@@ -24,11 +24,14 @@ from pprint import pprint
 
 logging.basicConfig(level=logging.CRITICAL)
 
+with open("account.info", encoding="utf-8") as f:
+    accountDICT = json.loads(f.read())
+# 另一個寫法是：accountDICT = json.load(open("account.info", encoding="utf-8"))
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
-handler = WebhookHandler('YOUR_CHANNEL_SECRET')
+line_bot_api = LineBotApi(accountDICT["linebot_api"])
+handler = WebhookHandler(accountDICT["webhook_secret"])
 
 
 @app.route("/callback", methods=['POST'])
@@ -102,9 +105,7 @@ mscDICT = {
 }
 # </取得多輪對話資訊>
 
-with open("account.info", encoding="utf-8") as f:
-    accountDICT = json.loads(f.read())
-# 另一個寫法是：accountDICT = json.load(open("account.info", encoding="utf-8"))
+
 
 
 def getLokiResult(inputSTR):
